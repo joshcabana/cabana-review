@@ -13,6 +13,11 @@
       content="https://cabanacollections.com.au/assets/Images/social-share-1200x630.jpg"
     />
     <meta property="og:type" content="website" />
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="About | CABANA" />
+    <meta name="twitter:description" content="Discover CABANA's philosophy of conscious craft. Ethically made essentials designed for comfort and positive impact." />
+    <meta name="twitter:image" content="https://cabanacollections.com.au/assets/Images/social-share-1200x630.jpg" />
     <!-- UPDATED: canonical -->
     <link rel="canonical" href="https://cabanacollections.com.au/about.html" />
     <!-- UPDATED: WebPage JSON-LD -->
@@ -37,20 +42,32 @@
       content="Discover CABANA's philosophy of conscious craft. Ethically made essentials designed for comfort and positive impact."
     />
 
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Resource Hints -->
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+    <link rel="dns-prefetch" href="https://cdn.tailwindcss.com" />
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+    <link rel="dns-prefetch" href="https://unpkg.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin />
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
+    <link rel="preconnect" href="https://unpkg.com" crossorigin />
+
+    <!-- Tailwind CSS (built) -->
+    <link rel="stylesheet" href="/css/tw.out.css" />
 
     <!-- AOS CSS -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
 
     <!-- Custom Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700&family=Inter:wght@300;400;500&display=swap"
       rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
     />
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
 
     <!-- Global Styles -->
     <link rel="stylesheet" href="/css/styles.css" />
@@ -60,6 +77,7 @@
     <!-- Mobile/perf hardening: additive utilities; import last to avoid overrides -->
     <link rel="stylesheet" href="/assets/css/mobile.css" />
     <script src="/js/auth.js" defer></script>
+    <script src="/js/performance-optimizer.js" defer></script>
 
     <style>
       /* Custom styles */
@@ -166,6 +184,7 @@
     </style>
   </head>
   <body class="bg-white text-black font-sans">
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-black text-white px-4 py-2 z-50">Skip to content</a>
     <style>
       /* moved from inline style to satisfy linter */
       .about-green-bg {
@@ -233,6 +252,7 @@
     </aside>
 
     <!-- Hero Section with Video Background -->
+    <main id="main-content">
     <section class="pt-24 pb-16 min-h-[70vh] flex items-center relative overflow-hidden">
       <!-- Subtle animated background -->
       <div class="absolute inset-0 bg-gradient-to-br from-gray-50 to-white opacity-50"></div>
@@ -573,13 +593,13 @@
             <div class="space-y-6">
               <!-- YWCA -->
               <div class="bg-gray-50 p-6 hover:bg-gray-100 transition-colors">
-                <h4 class="font-heading text-lg mb-2">YWCA Canberra</h4>
+                <h4 class="font-heading text-lg mb-2">UN Women Australia</h4>
                 <p class="text-sm text-gray-600 mb-4">
-                  Championing women's advocacy, housing support, and leadership development,
-                  creating pathways to independence and empowerment.
+                  Our women's collection supports UN Women Australia—programmes in leadership,
+                  safety and economic security that uplift women and girls.
                 </p>
                 <a
-                  href="https://ywca-canberra.org.au"
+                  href="https://unwomen.org.au"
                   target="_blank"
                   rel="noopener noreferrer"
                   class="text-xs tracking-wider uppercase text-gold hover:text-black transition-colors"
@@ -590,19 +610,11 @@
 
               <!-- Fearless Women -->
               <div class="bg-gray-50 p-6 hover:bg-gray-100 transition-colors">
-                <h4 class="font-heading text-lg mb-2">Fearless Women</h4>
+                <h4 class="font-heading text-lg mb-2">Women's Safety & Leadership</h4>
                 <p class="text-sm text-gray-600 mb-4">
-                  Mentoring and confidence-building programs for young girls, nurturing the fearless
-                  leaders of tomorrow.
+                  We prioritise programs that strengthen women's safety, leadership and
+                  participation—here at home.
                 </p>
-                <a
-                  href="https://fearlesswomen.org.au"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="text-xs tracking-wider uppercase text-gold hover:text-black transition-colors"
-                >
-                  Visit Site →
-                </a>
               </div>
 
               <!-- UN Women -->
@@ -669,6 +681,7 @@
         </div>
       </div>
     </section>
+    </main>
 
     <!-- Footer -->
     <footer class="bg-black text-white py-10 footer-textured">

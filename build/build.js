@@ -9,8 +9,7 @@ const glob = require('glob');
 const CleanCSS = require('clean-css');
 const htmlMinifier = require('html-minifier-terser');
 const { rollup } = require('rollup');
-const { terser } = require('@rollup/plugin-terser');
-const critical = require('critical');
+let terserPluginFactory = null; // dynamic import to support ESM
 const replaceInFile = require('replace-in-file');
 const crypto = require('crypto');
 
@@ -57,9 +56,22 @@ function minifyCssFiles() {
 
 async function bundleJs() {
   log('Bundling and minifying JS');
+  // Dynamically import ESM terser plugin when needed
+  if (!terserPluginFactory) {
+    try {
+      const mod = await import('@rollup/plugin-terser');
+      terserPluginFactory = mod.terser || mod.default || mod;
+    } catch (e) {
+      console.warn('[build] Unable to import @rollup/plugin-terser; proceeding without minification:', e.message);
+    }
+  }
   const jsFiles = glob.sync('js/**/*.js', { nodir: true });
   for (const entry of jsFiles) {
-    const bundle = await rollup({ input: entry, plugins: [terser()] });
+    const plugins = [];
+    if (typeof terserPluginFactory === 'function') {
+      try { plugins.push(terserPluginFactory()); } catch (_) {}
+    }
+    const bundle = await rollup({ input: entry, plugins });
     const { output } = await bundle.generate({ format: 'iife', sourcemap: false });
     const fileName = path.basename(entry);
     const dest = path.join(outDir, 'js', fileName);
@@ -76,20 +88,26 @@ async function minifyHtml() {
   });
   for (const file of htmlFiles) {
     const src = fs.readFileSync(file, 'utf8');
-    const min = await htmlMinifier.minify(src, {
-      collapseWhitespace: true,
-      removeComments: true,
-      removeRedundantAttributes: true,
-      removeEmptyAttributes: true,
-      minifyCSS: true,
-      minifyJS: true,
-      keepClosingSlash: true,
-      sortAttributes: true,
-      sortClassName: true,
-    });
+    let output = src;
+    try {
+      output = await htmlMinifier.minify(src, {
+        collapseWhitespace: true,
+        removeComments: true,
+        removeRedundantAttributes: true,
+        removeEmptyAttributes: true,
+        minifyCSS: true,
+        // minifyJS can be fragile on inline scripts; keep enabled but fall back on failure
+        minifyJS: true,
+        keepClosingSlash: true,
+        sortAttributes: true,
+        sortClassName: true,
+      });
+    } catch (e) {
+      console.warn(`[build] HTML minify failed for ${file}: ${e.message}. Writing unminified.`);
+    }
     const dest = path.join(outDir, file);
     ensureDir(path.dirname(dest));
-    fs.writeFileSync(dest, min);
+    fs.writeFileSync(dest, output);
   }
 }
 
@@ -137,6 +155,15 @@ function fingerprintAssetsAndRewrite() {
 
 async function extractCritical() {
   log('Extracting critical CSS (mobile + desktop)');
+  // Dynamically import ESM module to avoid require() on ESM graph with TLA
+  let generate;
+  try {
+    const mod = await import('critical');
+    generate = mod.generate || (mod.default && mod.default.generate);
+  } catch (e) {
+    console.warn('[build] Unable to import critical; skipping critical CSS:', e.message);
+    return;
+  }
   const pages = [
     'index.html',
     'products/mens-boxer-brief-black.html',
@@ -146,7 +173,7 @@ async function extractCritical() {
 
   for (const page of pages) {
     try {
-      await critical.generate({
+      await generate({
         base: outDir,
         src: page,
         target: page,

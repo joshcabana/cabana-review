@@ -34,10 +34,24 @@
     <meta property="og:type" content="product" />
     <meta property="product:price:amount" content="50" />
     <meta property="product:price:currency" content="AUD" />
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="CABANA Men's Boxer Brief — Modal Comfort, Anatomical Pouch & U‑Mesh" />
+    <meta name="twitter:description" content="Modal softness, anatomical pouch and discreet U‑mesh ventilation. Minimal look, maximum comfort." />
+    <meta name="twitter:image" content="https://cabanacollections.com.au/assets/Images/CABANA-BOXERS-FRONT.png" />
 
-    <!-- Preconnect -->
+    <!-- Resource Hints -->
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+    <link rel="dns-prefetch" href="https://cdn.tailwindcss.com" />
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin />
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
+
+    <!-- Preload LCP image -->
+    <link rel="preload" as="image" href="../assets/Images/CABANA-BOXERS-FRONT.png" />
 
     <!-- Critical CSS -->
     <style>
@@ -345,8 +359,8 @@
       }
     </style>
 
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Tailwind CSS (built) -->
+    <link rel="stylesheet" href="/css/tw.out.css" />
     <!-- UPDATED: global stylesheet -->
     <link rel="stylesheet" href="/css/styles.css" />
     <link rel="stylesheet" href="/css/optimized/lazy-loading.css" />
@@ -354,6 +368,7 @@
     <!-- Shared UI Enhancements -->
     <script src="/js/ui.js" defer></script>
     <script src="/assets/js/flags.js" defer></script>
+    <script src="/js/performance-optimizer.js" defer></script>
 
     <!-- Fonts -->
     <link
@@ -388,7 +403,7 @@
         },
         "material": "95% Modal, 5% Elastane",
         "manufacturer": {
-          "@type": "Organisation",
+          "@type": "Organization",
           "name": "CABANA"
         }
       }
@@ -530,14 +545,19 @@
           <div class="product-gallery space-y-6">
             <!-- Main Image/Video with Zoom -->
             <div class="product-image aspect-[3/4] relative group">
-              <img
-                id="mainImage"
-                src="../assets/Images/CABANA-BOXERS-FRONT.png"
-                alt="Front view of CABANA black boxer brief with gold-edge waistband and side-fly"
-                class="w-full h-full object-cover zoomable-image"
-                tabindex="0"
-                aria-describedby="image-zoom-instruction"
-              />
+              <picture>
+                <source srcset="../assets/Images/CABANA-MODEL-BOXERS-FRONT.webp" type="image/webp" />
+                <img
+                  id="mainImage"
+                  src="../assets/Images/CABANA-BOXERS-FRONT.png"
+                  alt="Front view of CABANA black boxer brief with gold-edge waistband and side-fly"
+                  class="w-full h-full object-cover zoomable-image"
+                  decoding="async" fetchpriority="high" width="600" height="800"
+                  tabindex="0"
+                  aria-describedby="image-zoom-instruction"
+                  sizes="(min-width: 1024px) 600px, (min-width: 768px) 50vw, 100vw"
+                />
+              </picture>
 
               <!-- 360° Video Element -->
               <video
@@ -551,14 +571,8 @@
                 preload="metadata"
                 aria-describedby="video-instruction"
               >
-                <source
-                  src="../assets/Images/CABANA-BOXERS-360-Desktop.mov"
-                  media="(min-width: 768px)"
-                />
-                <source
-                  src="../assets/Images/CABANA-BOXERS-360-Mobile.mov"
-                  media="(max-width: 767px)"
-                />
+                <source src="../assets/Images/CABANA-BOXERS-360-Desktop.mp4" media="(min-width: 768px)" type="video/mp4" />
+                <source src="../assets/Images/CABANA-BOXERS-360-Mobile.mp4" media="(max-width: 767px)" type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
 
@@ -1479,6 +1493,16 @@
               : 'Free shipping unlocked!';
         }
       });
+
+      // Service Worker Registration (for faster repeat visits)
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker
+            .register('/sw.js')
+            .then(async (reg) => { try { await reg.update(); } catch (_) {} })
+            .catch(() => {});
+        });
+      }
     </script>
     <!-- Optimised JavaScript -->
     <script>

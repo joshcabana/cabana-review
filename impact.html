@@ -13,6 +13,11 @@
       content="https://cabanacollections.com.au/assets/Images/social-share-1200x630.jpg"
     />
     <meta property="og:type" content="website" />
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Impact | CABANA" />
+    <meta name="twitter:description" content="10% of every purchase gives back. Men's → Beyond Blue. Women’s → UN Women Australia." />
+    <meta name="twitter:image" content="https://cabanacollections.com.au/assets/Images/social-share-1200x630.jpg" />
     <!-- UPDATED: canonical -->
     <link rel="canonical" href="https://cabanacollections.com.au/impact.html" />
     <!-- UPDATED: WebPage JSON-LD -->
@@ -37,22 +42,34 @@
       content="Premium essentials. 10% of every purchase supports mental-health initiatives with Beyond Blue."
     />
 
+    <!-- Resource Hints -->
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+    <link rel="dns-prefetch" href="https://cdn.tailwindcss.com" />
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+    <link rel="dns-prefetch" href="https://unpkg.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin />
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
+    <link rel="preconnect" href="https://unpkg.com" crossorigin />
+
     <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/css/tw.out.css" />
 
     <!-- AOS CSS -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
 
     <!-- Custom Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700&family=Inter:wght@300;400;500&display=swap"
       rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
     />
     <link
       href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap"
-      rel="stylesheet"
+      rel="stylesheet" media="print" onload="this.media='all'"
     />
 
     <!-- Link to main styles -->
@@ -60,6 +77,7 @@
     <link rel="stylesheet" href="/public/css/mobile-fixes.css" />
     <!-- Mobile/perf hardening: additive utilities; import last to avoid overrides -->
     <link rel="stylesheet" href="/assets/css/mobile.css" />
+    <script src="/js/performance-optimizer.js" defer></script>
 
     <!-- Organization JSON-LD for impact credibility -->
     <script type="application/ld+json">
@@ -445,16 +463,16 @@
               </div>
 
               <div class="space-y-8">
-                <!-- YWCA -->
+                <!-- UN Women Australia (primary women's partner) -->
                 <div class="group">
                   <div class="border-t border-gray-200 pt-8">
-                    <h4 class="font-heading text-lg mb-2">YWCA Canberra</h4>
+                    <h4 class="font-heading text-lg mb-2">UN Women Australia</h4>
                     <p class="text-sm text-gray-600 mb-4 leading-relaxed">
-                      Championing women's advocacy, housing support, and leadership development,
-                      creating pathways to independence and empowerment.
+                      Advancing gender equality and women's empowerment through evidence‑based
+                      programs in leadership, safety, and economic security.
                     </p>
                     <a
-                      href="https://ywca-canberra.org.au"
+                      href="https://unwomen.org.au"
                       target="_blank"
                       rel="noopener noreferrer"
                       class="text-xs tracking-wider uppercase text-gold hover:text-black transition-colors"
@@ -464,60 +482,14 @@
                   </div>
                 </div>
 
-                <!-- Fearless Women -->
+                <!-- Women's Safety & Leadership (category summary) -->
                 <div class="group">
                   <div class="border-t border-gray-200 pt-8">
-                    <h4 class="font-heading text-lg mb-2">Fearless Women</h4>
+                    <h4 class="font-heading text-lg mb-2">Women's Safety & Leadership</h4>
                     <p class="text-sm text-gray-600 mb-4 leading-relaxed">
-                      Mentoring and confidence-building programs for young girls, nurturing the
-                      fearless leaders of tomorrow.
+                      We prioritise programs that strengthen women's safety, leadership, and
+                      economic participation in Australia.
                     </p>
-                    <a
-                      href="https://fearlesswomen.org.au"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      class="text-xs tracking-wider uppercase text-gold hover:text-black transition-colors"
-                    >
-                      Visit Site →
-                    </a>
-                  </div>
-                </div>
-
-                <!-- Share the Dignity -->
-                <div class="group">
-                  <div class="border-t border-gray-200 pt-8">
-                    <h4 class="font-heading text-lg mb-2">Share the Dignity</h4>
-                    <p class="text-sm text-gray-600 mb-4 leading-relaxed">
-                      Ensuring women experiencing homelessness or fleeing domestic violence have
-                      access to essential period products and dignity.
-                    </p>
-                    <a
-                      href="https://sharethedignity.org.au"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      class="text-xs tracking-wider uppercase text-gold hover:text-black transition-colors"
-                    >
-                      Visit Site →
-                    </a>
-                  </div>
-                </div>
-
-                <!-- Toora Women -->
-                <div class="group">
-                  <div class="border-t border-gray-200 pt-8">
-                    <h4 class="font-heading text-lg mb-2">Toora Women</h4>
-                    <p class="text-sm text-gray-600 mb-4 leading-relaxed">
-                      Providing crucial support for women facing domestic violence or homelessness,
-                      offering safety, shelter, and pathways to recovery.
-                    </p>
-                    <a
-                      href="https://toora.org.au"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      class="text-xs tracking-wider uppercase text-gold hover:text-black transition-colors"
-                    >
-                      Visit Site →
-                    </a>
                   </div>
                 </div>
 

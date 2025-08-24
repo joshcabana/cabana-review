@@ -25,6 +25,7 @@ function formatAUD(cents) {
 }
 
 // Main cart calculation function
+/* eslint-disable no-unused-vars */
 function calcCartTotals({ lineItems, discountsCents = 0, shippingCents = null }) {
   // Calculate subtotal in cents
   const subtotalCents = lineItems.reduce((sum, item) => {

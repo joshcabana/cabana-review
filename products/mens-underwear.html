@@ -345,8 +345,8 @@
       }
     </style>
 
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Tailwind CSS (built) -->
+    <link rel="stylesheet" href="/css/tw.out.css" />
     <!-- UPDATED: global stylesheet -->
     <link rel="stylesheet" href="/css/styles.css" />
     <!-- Shared UI Enhancements -->
@@ -553,14 +553,8 @@
                 preload="auto"
                 aria-describedby="video-instruction"
               >
-                <source
-                  src="../assets/Images/CABANA-BOXERS-360-Desktop.mov"
-                  media="(min-width: 768px)"
-                />
-                <source
-                  src="../assets/Images/CABANA-BOXERS-360-Mobile.mov"
-                  media="(max-width: 767px)"
-                />
+                <source src="../assets/Images/CABANA-BOXERS-360-Desktop.mp4" media="(min-width: 768px)" type="video/mp4" />
+                <source src="../assets/Images/CABANA-BOXERS-360-Mobile.mp4" media="(max-width: 767px)" type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
 

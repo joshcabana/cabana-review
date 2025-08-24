@@ -13,6 +13,11 @@
       content="https://cabanacollections.com.au/assets/Images/social-share-1200x630.jpg"
     />
     <meta property="og:type" content="website" />
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Shopping Cart | CABANA" />
+    <meta name="twitter:description" content="Your CABANA shopping cart. Review items before checkout." />
+    <meta name="twitter:image" content="https://cabanacollections.com.au/assets/Images/social-share-1200x630.jpg" />
     <!-- UPDATED: canonical -->
     <link rel="canonical" href="https://cabanacollections.com.au/cart.html" />
     <!-- UPDATED: WebPage JSON-LD -->
@@ -37,18 +42,30 @@
       content="Your CABANA shopping cart. Review your conscious craft selections and proceed to checkout."
     />
 
+    <!-- Resource Hints -->
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+    <link rel="dns-prefetch" href="https://cdn.tailwindcss.com" />
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+    <link rel="dns-prefetch" href="https://unpkg.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin />
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
+    <link rel="preconnect" href="https://unpkg.com" crossorigin />
+
     <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/css/tw.out.css" />
 
     <!-- AOS CSS -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
 
     <!-- Custom Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700&family=Inter:wght@300;400;500&display=swap"
       rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
     />
     <link rel="stylesheet" href="/css/styles.css" />
     <link rel="stylesheet" href="/public/css/mobile-fixes.css" />
@@ -58,6 +75,7 @@
     <script src="/js/nav.js" defer></script>
     <script src="/assets/js/flags.js" defer></script>
     <script src="/js/auth.js" defer></script>
+    <script src="/js/performance-optimizer.js" defer></script>
 
     <style>
       /* Custom styles */
@@ -299,15 +317,19 @@
         <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
           <a href="/products/mens-boxer-brief-black.html" class="group block">
             <div class="relative overflow-hidden bg-gray-100 aspect-[3/4]">
-              <img
-                src="/assets/Images/CABANA-BOXERS-FRONT.png"
-                alt="Men's Essential Brief"
-                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                loading="lazy"
-                decoding="async"
-                width="600"
-                height="800"
-              />
+              <picture>
+                <source srcset="/assets/Images/CABANA-MODEL-BOXERS-FRONT.webp" type="image/webp" />
+                <img
+                  src="/assets/Images/CABANA-BOXERS-FRONT.png"
+                  alt="Men's Essential Brief"
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                  loading="lazy"
+                  decoding="async"
+                  width="600"
+                  height="800"
+                  sizes="(min-width: 768px) 300px, 100vw"
+                />
+              </picture>
             </div>
             <div class="mt-6 text-center">
               <h3 class="font-heading text-2xl mb-2">Men's Collection</h3>
@@ -317,15 +339,19 @@
 
           <a href="/products/womens-set.html" class="group block">
             <div class="relative overflow-hidden bg-gray-100 aspect-[3/4]">
-              <img
-                src="/assets/Images/CABANA-WOMEN.PNG"
-                alt="Women's Essential Set"
-                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                loading="lazy"
-                decoding="async"
-                width="600"
-                height="800"
-              />
+              <picture>
+                <source srcset="/assets/Images/CABANA-WOMEN.webp" type="image/webp" />
+                <img
+                  src="/assets/Images/CABANA-WOMEN.PNG"
+                  alt="Women's Essential Set"
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                  loading="lazy"
+                  decoding="async"
+                  width="600"
+                  height="800"
+                  sizes="(min-width: 768px) 300px, 100vw"
+                />
+              </picture>
             </div>
             <div class="mt-6 text-center">
               <h3 class="font-heading text-2xl mb-2">Women's Collection</h3>

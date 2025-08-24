@@ -1,6 +1,17 @@
 <!doctype html>
 <html lang="en-AU">
   <head>
+    <!-- SEO / Social -->
+    <meta property="og:title" content="Transparency | CABANA Collections" />
+    <meta property="og:description" content="How we calculate 10%, allocation by cause, quarterly summaries and receipts." />
+    <meta property="og:url" content="https://cabanacollections.com.au/impact/transparency/" />
+    <meta property="og:image" content="https://cabanacollections.com.au/assets/Images/social-share-1200x630.jpg" />
+    <meta property="og:type" content="website" />
+    <link rel="canonical" href="https://cabanacollections.com.au/impact/transparency/" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Transparency | CABANA Collections" />
+    <meta name="twitter:description" content="How we calculate 10%, allocation by cause, quarterly summaries and receipts." />
+    <meta name="twitter:image" content="https://cabanacollections.com.au/assets/Images/social-share-1200x630.jpg" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Transparency | CABANA Collections</title>
@@ -8,10 +19,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/css/tw.out.css" />
     <link rel="stylesheet" href="/css/styles.css" />
   </head>
   <body class="bg-white text-black font-sans">
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-black text-white px-4 py-2 z-50">Skip to content</a>
     <header class="sticky-header" role="banner">
       <div class="max-w-7xl mx-auto px-6 md:px-12 py-4 flex items-center justify-between">
         <a href="/" class="font-heading tracking-luxury font-light leading-tight">
@@ -30,7 +42,7 @@
         </div>
       </div>
     </header>
-    <div class="max-w-7xl mx-auto px-6 md:px-12 py-16">
+    <main id="main-content" class="max-w-7xl mx-auto px-6 md:px-12 py-16">
       <h1 class="font-heading text-4xl md:text-5xl mb-8">Transparency</h1>
       <p class="text-gray-700 max-w-3xl mb-10">We designate 10% of every purchase to impact. Below is a scaffold showing how we calculate 10%, how funds are allocated, and quarterly summaries. Receipts will be linked as they become available.</p>
 
@@ -68,7 +80,7 @@
         <ul id="receiptList" class="list-disc ml-6 text-sm text-gray-700"></ul>
         <!-- TODO: Replace with live receipts as they become available. -->
       </section>
-    </div>
+    </main>
 
     <script>
       async function loadImpact() {

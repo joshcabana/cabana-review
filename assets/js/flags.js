@@ -55,9 +55,13 @@
       if (next && typeof next.authEnabled !== 'undefined') {
         localStorage.setItem('CABANA_FLAG_authEnabled', next.authEnabled ? 'true' : 'false');
       }
-    } catch (_) {}
+    } catch (_) { /* noop */ }
     // Reload to apply
-    try { win.location && win.location.reload && win.location.reload(); } catch (_) {}
+    try {
+      if (win.location && typeof win.location.reload === 'function') {
+        win.location.reload();
+      }
+    } catch (/** @type {*} */ _e) { /* noop */ }
   };
 })();
 

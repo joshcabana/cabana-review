@@ -37,8 +37,15 @@
       content="CABANA terms of service. Read our terms and conditions for using our website and purchasing our products."
     />
 
+    <!-- Resource Hints -->
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+    <link rel="dns-prefetch" href="https://cdn.tailwindcss.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin />
     <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/css/tw.out.css" />
     <!-- Global Styles -->
     <link rel="stylesheet" href="/css/styles.css" />
     <link rel="stylesheet" href="/public/css/mobile-fixes.css" />
@@ -46,11 +53,9 @@
     <link rel="stylesheet" href="/assets/css/mobile.css" />
 
     <!-- Custom Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700&family=Inter:wght@300;400;500&display=swap"
-      rel="stylesheet"
+      rel="stylesheet" media="print" onload="this.media='all'"
     />
 
     <style>
@@ -98,6 +103,7 @@
     </style>
   </head>
   <body class="bg-white text-black font-sans">
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-black text-white px-4 py-2 z-50">Skip to content</a>
     <!-- New Sticky Header + Mobile Drawer -->
     <header class="sticky-header" role="banner">
       <div class="max-w-7xl mx-auto px-6 md:px-12 py-4 flex items-center justify-between">
@@ -151,7 +157,7 @@
     </aside>
 
     <!-- Legal Content -->
-    <section class="pt-24 pb-16">
+    <main id="main-content" class="pt-24 pb-16">
       <div class="container mx-auto px-6 md:px-12">
         <div class="max-w-4xl mx-auto">
           <h1 class="font-heading text-4xl md:text-5xl mb-8">Terms of Service</h1>
@@ -352,7 +358,7 @@
           </div>
         </div>
       </div>
-    </section>
+    </main>
 
     <!-- Footer -->
     <footer class="bg-black text-white py-10 footer-textured">

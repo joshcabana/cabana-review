@@ -1,6 +1,0 @@
-User-agent: *
-Allow: /
-Sitemap: https://cabana-collections-v1-h72srf1bu-josh-cabanas-projects.vercel.app/sitemap.xml
-<!-- TODO: update domain to https://cabanacollections.com.au/sitemap.xml when live -->
-
-

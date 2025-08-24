@@ -13,6 +13,11 @@
       content="https://cabanacollections.com.au/assets/Images/social-share-1200x630.jpg"
     />
     <meta property="og:type" content="website" />
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Privacy Policy | CABANA Collections" />
+    <meta name="twitter:description" content="How CABANA collects, uses, and protects your personal information in line with Australian privacy law." />
+    <meta name="twitter:image" content="https://cabanacollections.com.au/assets/Images/social-share-1200x630.jpg" />
     <!-- UPDATED: canonical -->
     <link rel="canonical" href="https://cabanacollections.com.au/privacy-policy.html" />
     <!-- UPDATED: WebPage JSON-LD -->
@@ -37,21 +42,30 @@
       content="How CABANA Collections handles personal information in Australia in line with the APPs. Includes Google Analytics details and Spam Act unsubscribe."
     />
 
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- Custom Fonts -->
+    <!-- Resource Hints -->
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+    <link rel="dns-prefetch" href="https://cdn.tailwindcss.com" />
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin />
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
+
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="/css/tw.out.css" />
+
+    <!-- Custom Fonts -->
     <link
       href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700&family=Inter:wght@300;400;500&display=swap"
-      rel="stylesheet"
+      rel="stylesheet" media="print" onload="this.media='all'"
     />
     <link rel="stylesheet" href="/css/styles.css" />
     <link rel="stylesheet" href="/public/css/mobile-fixes.css" />
     <!-- Mobile/perf hardening: additive utilities; import last to avoid overrides -->
     <link rel="stylesheet" href="/assets/css/mobile.css" />
     <script src="/js/ui.js" defer></script>
+    <script src="/js/performance-optimizer.js" defer></script>
 
     <style>
       /* Custom styles */

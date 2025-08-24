@@ -25,10 +25,24 @@
     <meta property="og:type" content="product" />
     <meta property="product:price:amount" content="50" />
     <meta property="product:price:currency" content="AUD" />
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="CABANA Women's 1st Classics" />
+    <meta name="twitter:description" content="Premium modal bralette and brief set with luxurious comfort. Sustainably crafted for all-day elegance." />
+    <meta name="twitter:image" content="https://cabanacollections.com.au/assets/Images/CABANA-WOMEN.PNG" />
 
-    <!-- Preconnect -->
+    <!-- Resource Hints -->
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+    <link rel="dns-prefetch" href="https://cdn.tailwindcss.com" />
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin />
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
+
+    <!-- Preload LCP image -->
+    <link rel="preload" as="image" href="../assets/Images/CABANA-WOMEN.PNG" />
 
     <!-- Critical CSS -->
     <style>
@@ -314,8 +328,8 @@
       }
     </style>
 
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Tailwind CSS (built) -->
+    <link rel="stylesheet" href="/css/tw.out.css" />
     <!-- UPDATED: global stylesheet -->
     <link rel="stylesheet" href="/css/styles.css" />
     <link rel="stylesheet" href="/css/optimized/lazy-loading.css" />
@@ -324,6 +338,7 @@
     <script src="/js/ui.js" defer></script>
     <script src="/assets/js/flags.js" defer></script>
     <script src="/js/auth.js" defer></script>
+    <script src="/js/performance-optimizer.js" defer></script>
 
     <!-- Fonts -->
     <link
@@ -502,15 +517,20 @@
           <div class="product-gallery space-y-6">
             <!-- Main Image with Zoom -->
             <div class="product-image aspect-[3/4] relative group">
-              <img
-                id="mainImage"
-                src="../assets/Images/CABANA-WOMEN.PNG"
-                alt="Women's Essential Set - Front view"
-                class="w-full h-full object-cover zoomable-image"
-                tabindex="0"
-                role="img"
-                aria-describedby="image-zoom-instruction"
-              />
+              <picture>
+                <source srcset="../assets/Images/CABANA-WOMEN.webp" type="image/webp" />
+                <img
+                  id="mainImage"
+                  src="../assets/Images/CABANA-WOMEN.PNG"
+                  alt="Women's Essential Set - Front view"
+                  class="w-full h-full object-cover zoomable-image"
+                  decoding="async" fetchpriority="high" width="600" height="800"
+                  tabindex="0"
+                  role="img"
+                  aria-describedby="image-zoom-instruction"
+                  sizes="(min-width: 1024px) 600px, (min-width: 768px) 50vw, 100vw"
+                />
+              </picture>
               <span id="image-zoom-instruction" class="sr-only"
                 >Click or press Enter to zoom image</span
               >
@@ -533,7 +553,7 @@
               >
                 <img
                   src="../assets/Images/CABANA-WOMEN.PNG"
-                  alt=""
+                  alt="Women's set – front view"
                   class="w-full aspect-square object-cover"
                   loading="lazy"
                 />
@@ -546,7 +566,7 @@
               >
                 <img
                   src="../assets/Images/CABANA-WOMEN2.PNG"
-                  alt=""
+                  alt="Women's set – side view"
                   class="w-full aspect-square object-cover"
                   loading="lazy"
                 />
@@ -559,7 +579,7 @@
               >
                 <img
                   src="../assets/Images/CABANA-WOMEN3.PNG"
-                  alt=""
+                  alt="Women's set – back view"
                   class="w-full aspect-square object-cover"
                   loading="lazy"
                 />
@@ -572,7 +592,7 @@
               >
                 <img
                   src="../assets/Images/CABANA-WOMEN4.PNG"
-                  alt=""
+                  alt="Women's set – detail view"
                   class="w-full aspect-square object-cover"
                   loading="lazy"
                 />
@@ -941,6 +961,7 @@
           class="w-full h-full object-cover"
           poster="/assets/Images/CABANA-WOMEN.webp"
           data-offscreen-pause
+          preload="metadata"
         >
           <source src="/assets/Images/Women.mp4" type="video/mp4" />
         </video>
@@ -1070,7 +1091,7 @@
                 </div>
                 <div>
                   <h4 class="text-xl font-heading text-gray-900 mb-1">Women's Empowerment</h4>
-                  <p class="text-gray-700 text-sm">Women's Health Victoria</p>
+                  <p class="text-gray-700 text-sm">UN Women Australia</p>
                 </div>
               </div>
 
@@ -1194,8 +1215,8 @@
                   <span class="text-white font-bold text-xs">WHV</span>
                 </div>
                 <div class="text-left">
-                  <div class="font-medium text-gray-900">Women's Health Victoria</div>
-                  <div class="text-xs text-gray-500">Gender Equity • Women's Wellbeing</div>
+                  <div class="font-medium text-gray-900">UN Women Australia</div>
+                  <div class="text-xs text-gray-500">Gender Equality • Women's Empowerment</div>
                 </div>
               </div>
             </div>
@@ -2050,6 +2071,15 @@
       });
 
       // Add mobile sticky CTA HTML at the end
+      // Service Worker Registration (for faster repeat visits)
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker
+            .register('/sw.js')
+            .then(async (reg) => { try { await reg.update(); } catch (_) {} })
+            .catch(() => {});
+        });
+      }
     </script>
   </body>
   </html>

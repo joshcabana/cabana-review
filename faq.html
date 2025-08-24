@@ -51,24 +51,36 @@
       content="https://cabanacollections.com.au/assets/Images/social-share-1200x630.jpg"
     />
     <meta property="og:type" content="website" />
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="FAQ | CABANA" />
+    <meta name="twitter:description" content="Answers to shipping, returns, care, and impact questions." />
+    <meta name="twitter:image" content="https://cabanacollections.com.au/assets/Images/social-share-1200x630.jpg" />
 
-    <!-- Preconnect -->
+    <!-- Resource Hints -->
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+    <link rel="dns-prefetch" href="https://cdn.tailwindcss.com" />
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin />
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
 
     <!-- Fonts -->
     <link
       href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700&family=Inter:wght@300;400;500&display=swap"
-      rel="stylesheet"
+      rel="stylesheet" media="print" onload="this.media='all'"
     />
 
     <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/css/tw.out.css" />
     <!-- Global Styles -->
     <link rel="stylesheet" href="/css/styles.css" />
     <link rel="stylesheet" href="/public/css/mobile-fixes.css" />
     <!-- Mobile/perf hardening: additive utilities; import last to avoid overrides -->
     <link rel="stylesheet" href="/assets/css/mobile.css" />
+    <script src="/js/performance-optimizer.js" defer></script>
     <script>
       tailwind.config = {
         theme: {
@@ -637,11 +649,10 @@
                   mental health challenges.
                 </p>
 
-                <p><strong>Plan International (Women's Empowerment):</strong></p>
+                <p><strong>UN Women Australia (Women's Empowerment):</strong></p>
                 <p class="mt-2">
-                  A global organisation working to advance girls' rights and equality. Our
-                  contributions support education, economic empowerment, and leadership programs for
-                  women and girls.
+                  Our women's collection supports UN Women Australia—advancing gender equality, leadership,
+                  and safety programs that uplift women and girls.
                 </p>
 
                 <p class="mt-4">
