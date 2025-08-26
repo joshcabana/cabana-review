@@ -15,6 +15,12 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif; back
 .hero-content { animation: heroFadeUp 1.2s ease-out forwards; }
 @keyframes heroFadeUp { from { opacity: 0; transform: translateY(30px);} to { opacity: 1; transform: translateY(0);} }
 
+/* Mobile: remove full-screen overlay; add lightweight text-shadow for contrast */
+@media (max-width: 767px) {
+  .hero-overlay { display: none !important; }
+  .hero-title { text-shadow: 0 1px 2px rgba(0,0,0,.35); }
+}
+
 /* Link hover underline */
 .link-hover { position: relative; transition: color 0.3s ease; }
 .link-hover::after { content: ''; position: absolute; left: 50%; transform: translateX(-50%); bottom: -6px; height: 2px; width: 0; background: linear-gradient(90deg, transparent, #d4af37, transparent); opacity: 0; transition: width 0.3s ease, opacity 0.3s ease; }
