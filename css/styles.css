@@ -21,6 +21,7 @@
 
 /* ===========================
    Enhanced Color System
+.space-x-10
    =========================== */
 :root {
   /* Core Colors */
@@ -1367,7 +1368,12 @@ section {
 /* ===========================
    Print Styles
    =========================== */
-@media print {
+  /* Fallback spacing for nav items when Tailwind spacing utilities are unavailable */
+  .space-x-10 > * + * {
+        margin-left: 2.5rem;
+        }
+        
+   @media print {
   nav,
   .cabana-cart-count,
   .cabana-nav {
