@@ -23,15 +23,22 @@ webp() {
 
 # Hero images (home)
 webp assets/Images/HERO-BANNER.png assets/Images/HERO-BANNER.webp 85 || true
-# Mobile hero conversions (target ~1200px width)
+# Mobile hero conversions (target ~1080px width)
 if command -v magick >/dev/null 2>&1; then
-  magick assets/Images/HERO-BANNER-mobile.webp -resize 1200x -quality 75 assets/Images/HERO-BANNER-mobile.webp 2>/dev/null || true
-fi
-if [ -f assets/Images/HERO-BANNER-mobile.png ]; then
-  webp assets/Images/HERO-BANNER-mobile.png assets/Images/HERO-BANNER-mobile.webp 75 || true
-  avif assets/Images/HERO-BANNER-mobile.png assets/Images/HERO-BANNER-mobile.avif 45 || true
-elif [ -f assets/Images/HERO-BANNER-mobile.webp ]; then
-  avif assets/Images/HERO-BANNER-mobile.webp assets/Images/HERO-BANNER-mobile.avif 45 || true
+  if [ -f assets/Images/HERO-BANNER-mobile.png ]; then
+    magick assets/Images/HERO-BANNER-mobile.png -resize 1080x -quality 75 assets/Images/HERO-BANNER-mobile.webp 2>/dev/null || true
+    magick assets/Images/HERO-BANNER-mobile.png -resize 1080x -quality 45 assets/Images/HERO-BANNER-mobile.avif 2>/dev/null || true
+  elif [ -f assets/Images/HERO-BANNER-mobile.webp ]; then
+    magick assets/Images/HERO-BANNER-mobile.webp -resize 1080x -quality 75 assets/Images/HERO-BANNER-mobile.webp 2>/dev/null || true
+    magick assets/Images/HERO-BANNER-mobile.webp -resize 1080x -quality 45 assets/Images/HERO-BANNER-mobile.avif 2>/dev/null || true
+  fi
+else
+  if [ -f assets/Images/HERO-BANNER-mobile.png ]; then
+    webp assets/Images/HERO-BANNER-mobile.png assets/Images/HERO-BANNER-mobile.webp 75 || true
+    avif assets/Images/HERO-BANNER-mobile.png assets/Images/HERO-BANNER-mobile.avif 45 || true
+  elif [ -f assets/Images/HERO-BANNER-mobile.webp ]; then
+    avif assets/Images/HERO-BANNER-mobile.webp assets/Images/HERO-BANNER-mobile.avif 45 || true
+  fi
 fi
 avif assets/Images/HERO-BANNER.png assets/Images/HERO-BANNER.avif 28 || true
 
