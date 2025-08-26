@@ -39,8 +39,9 @@ section[aria-labelledby='newsletter-heading'] { content-visibility: auto; contai
 
 /* Philosophy virtualization for mobile */
 @media (max-width: 767px) {
-  .philosophy { content-visibility: auto; contain-intrinsic-size: 600px; }
-  .philosophy-bg { background: #0a0a0a !important; display: none; }
+  .philosophy { content-visibility: auto; contain-intrinsic-size: 600px; min-height: 0; }
+  .philosophy--mounted { content-visibility: visible; }
+  .philosophy-bg { display: none; }
 }
 /* Philosophy virtualization for mobile */
 @media (max-width: 767px) {

@@ -277,6 +277,8 @@
       </div>
     </section>
 
+    <div class="mt-6 md:mt-0" aria-hidden="true"></div>
+
     <!-- Main Content -->
     <main id="main-content">
       <!-- Optional IWD seasonal block (flag-controlled via window.CABANA_SHOW_IWD or March) -->
@@ -335,11 +337,7 @@
             preload="none"
             id="philosophyVideo"
           >
-            <source src="/assets/Images/Women.mp4" type="video/mp4" media="(min-width: 768px)" />
-            <!-- Fallback for browsers that don't support video -->
-            <div
-              class="w-full h-full bg-gradient-to-br from-slate-900 via-black to-slate-800"
-            ></div>
+            <source data-src="/assets/Images/Women.mp4" type="video/mp4" media="(min-width: 768px)" />
           </video>
           
         </div>
@@ -1378,6 +1376,7 @@
 
     <!-- Performance Optimiser Script -->
     <script src="/js/performance-optimizer.js" defer></script>
+    <script src="/assets/js/lazy-philosophy.js" defer></script>
     <!-- Shared UI Enhancements (nav shadow, etc.) -->
     <script src="/js/ui.js" defer></script>
     <!-- Mobile Nav Drawer -->
