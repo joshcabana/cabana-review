@@ -534,14 +534,19 @@
           <div class="product-gallery space-y-6">
             <!-- Main Image/Video with Zoom -->
             <div class="product-image aspect-[3/4] relative group">
-              <img
-                id="mainImage"
-                src="../assets/Images/CABANA-BOXERS-FRONT.png"
-                alt="Front view of CABANA black boxer brief with gold-edge waistband and side-fly"
-                class="w-full h-full object-cover zoomable-image"
-                tabindex="0"
-                aria-describedby="image-zoom-instruction"
-              />
+              <picture>
+                <source srcset="../assets/Images/CABANA-BOXERS-FRONT.avif" type="image/avif" />
+                <source srcset="../assets/Images/CABANA-BOXERS-FRONT.webp" type="image/webp" />
+                <img
+                  id="mainImage"
+                  src="../assets/Images/CABANA-BOXERS-FRONT.png"
+                  alt="Front view of CABANA black boxer brief with gold-edge waistband and side-fly"
+                  class="w-full h-full object-cover zoomable-image"
+                  width="600" height="800" fetchpriority="high" decoding="async"
+                  tabindex="0"
+                  aria-describedby="image-zoom-instruction"
+                />
+              </picture>
 
               <!-- 360° Video Element -->
               <video
@@ -552,7 +557,7 @@
                 loop
                 playsinline
                 webkit-playsinline
-                preload="auto"
+                preload="none"
                 aria-describedby="video-instruction"
               >
                 <source src="../assets/Images/CABANA-BOXERS-360-Desktop.mp4" media="(min-width: 768px)" type="video/mp4" />
@@ -623,7 +628,7 @@
                   src="../assets/Images/CABANA-BOXERS-FRONT.png"
                   alt="Front view of CABANA black boxer brief with gold-edge waistband and side-fly"
                   class="w-full aspect-square object-cover"
-                  loading="lazy"
+                  loading="lazy" decoding="async"
                 />
               </button>
               <button
@@ -636,7 +641,7 @@
                   src="../assets/Images/CABANA-BOXERS-BACK.png"
                   alt="Back view with gold-edge waistband and CABANA monogram tab"
                   class="w-full aspect-square object-cover"
-                  loading="lazy"
+                  loading="lazy" decoding="async"
                 />
               </button>
               <button
@@ -649,7 +654,7 @@
                   src="../assets/Images/CABANA-BOXERS-SIDE.png"
                   alt="Side profile highlighting pouch contour and breathable mesh"
                   class="w-full aspect-square object-cover"
-                  loading="lazy"
+                  loading="lazy" decoding="async"
                 />
               </button>
               <button
@@ -662,7 +667,7 @@
                   src="../assets/Images/CABANA BOXERS3 flat.png"
                   alt="Flat lay highlighting U-mesh cradle and coverstitch seams"
                   class="w-full aspect-square object-cover"
-                  loading="lazy"
+                  loading="lazy" decoding="async"
                 />
               </button>
               <button

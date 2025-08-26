@@ -35,55 +35,9 @@
     <link rel="preload" as="font" href="https://fonts.gstatic.com/s/playfairdisplay/v37/nuFvD-vYSZviVYUb_rj3ij__anPXJzDwcbmjWBN2PKdFvXDXbtM.woff2" type="font/woff2" crossorigin />
 
     <!-- ========== ANALYTICS ========== -->
-    <!-- Google Analytics -->
-    <!-- GA4 -->
+    <!-- Google Analytics loader + deferred init -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-3W997HDC19"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag('js', new Date());
-      // GA4 measurement ID
-      gtag('config', 'G-3W997HDC19', {
-        page_title: 'CABANA Homepage',
-        page_location: window.location.href,
-      });
-
-      // Enhanced ecommerce tracking
-      function trackPurchase(transactionId, value, items) {
-        gtag('event', 'purchase', {
-          transaction_id: transactionId,
-          value: value,
-          currency: 'AUD',
-          items: items,
-        });
-      }
-
-      function trackAddToCart(itemId, itemName, category, quantity, price) {
-        gtag('event', 'add_to_cart', {
-          currency: 'AUD',
-          value: price * quantity,
-          items: [
-            {
-              item_id: itemId,
-              item_name: itemName,
-              category: category,
-              quantity: quantity,
-              price: price,
-            },
-          ],
-        });
-      }
-
-      function trackBeginCheckout(value, items) {
-        gtag('event', 'begin_checkout', {
-          currency: 'AUD',
-          value: value,
-          items: items,
-        });
-      }
-    </script>
+    <script src="/assets/js/ga.js" defer></script>
 
     <!-- ========== PERFORMANCE OPTIMISATIONS ========== -->
 
@@ -764,25 +718,12 @@
       <div class="absolute inset-0 z-0">
         <!-- Image-first for fast LCP; video is revealed later when allowed -->
         <picture id="heroImageWrap" class="absolute inset-0 block z-0">
-          <source
-            srcset="
+          <source srcset="/assets/Images/HERO-BANNER.avif 1920w, /assets/Images/HERO-BANNER-mobile.avif 768w" type="image/avif" sizes="100vw" />
+          <source srcset="
               /assets/Images/HERO-BANNER.webp        1920w,
               /assets/Images/HERO-BANNER-mobile.webp  768w
-            "
-            type="image/webp"
-            sizes="100vw"
-          />
-          <img
-            id="heroImageFallback"
-            src="/assets/Images/HERO-BANNER.png"
-            sizes="100vw"
-            alt="CABANA hero background"
-            class="w-full h-full object-cover"
-            width="1920"
-            height="1080"
-            fetchpriority="high"
-            decoding="async"
-          />
+            " type="image/webp" sizes="100vw" />
+          <img id="heroImageFallback" src="/assets/Images/HERO-BANNER.png" sizes="100vw" alt="" class="w-full h-full object-cover" width="1920" height="1080" fetchpriority="high" decoding="async" />
         </picture>
 
         <video
@@ -797,11 +738,11 @@
           class="w-full h-full object-cover"
           poster="/assets/Images/HERO-BANNER.webp"
           data-offscreen-pause
-          preload="metadata"
+          preload="none"
           style="display: none"
           aria-hidden="true"
         >
-          <source src="/assets/Images/HERO-BANNER.mp4" type="video/mp4" />
+          <source src="/assets/Images/HERO-BANNER-opt.mp4" type="video/mp4" />
           <!-- Fallback for browsers that don't support video -->
           <div class="w-full h-full bg-gradient-to-br from-slate-900 via-black to-slate-800"></div>
         </video>
@@ -909,6 +850,7 @@
             class="w-full h-full object-cover"
             poster="/assets/Images/CABANA-WOMEN.webp"
             data-offscreen-pause
+            preload="none"
           >
             <source src="/assets/Images/Women.mp4" type="video/mp4" />
             <!-- Fallback for browsers that don't support video -->
