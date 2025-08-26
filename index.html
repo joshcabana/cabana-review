@@ -473,13 +473,9 @@
 
     <!-- 6. Tailwind CSS (built) -->
     <link rel="stylesheet" href="/css/tw.out.css" />
-    <!-- UPDATED: global stylesheet -->
-    <link rel="stylesheet" href="/css/styles.css" />
-    <link rel="stylesheet" href="/css/optimized/lazy-loading.css" />
-    <link rel="stylesheet" href="/css/optimized/performance.css" />
-    <link rel="stylesheet" href="/public/css/mobile-fixes.css" />
-    <!-- Mobile/perf hardening: additive utilities; import last to avoid overrides -->
-    <link rel="stylesheet" href="/assets/css/mobile.css" />
+    <!-- Defer custom stylesheet to avoid render-blocking -->
+    <link rel="preload" href="/css/styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/css/styles.css"></noscript>
 
     <!-- REMOVED: duplicate OG/Twitter block to keep one clean OG set only -->
 
@@ -715,9 +711,9 @@
         </div>
       </section>
       <!-- Philosophy Section -->
-      <section class="py-16 md:py-24 relative overflow-hidden" aria-labelledby="philosophy-heading">
+      <section class="py-16 md:py-24 relative overflow-hidden philosophy" aria-labelledby="philosophy-heading">
         <!-- Video Background -->
-        <div class="absolute inset-0 z-0">
+        <div class="absolute inset-0 z-0 philosophy-bg" style="background:#0a0a0a;">
           <video
             autoplay
             muted
@@ -726,9 +722,9 @@
             onloadedmetadata="this.muted = true; this.playsInline = true;"
             onplay="this.playsInline = true;"
             class="w-full h-full object-cover"
-            poster="/assets/Images/CABANA-WOMEN.webp"
             data-offscreen-pause
             preload="none"
+            id="philosophyVideo"
           >
             <source src="/assets/Images/Women.mp4" type="video/mp4" media="(min-width: 768px)" />
             <!-- Fallback for browsers that don't support video -->
@@ -736,10 +732,7 @@
               class="w-full h-full bg-gradient-to-br from-slate-900 via-black to-slate-800"
             ></div>
           </video>
-          <!-- Dark overlay for text readability -->
-          <div
-            class="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/50"
-          ></div>
+          
         </div>
 
         

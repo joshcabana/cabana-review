@@ -1,3 +1,8 @@
+/* Philosophy virtualization for mobile */
+@media (max-width: 767px) {
+  .philosophy { content-visibility: auto; contain-intrinsic-size: 600px; }
+  .philosophy-bg { background: #0a0a0a !important; }
+}
 /* CABANA - Main Stylesheet */
 
 /* Conscious Craft Design System */
