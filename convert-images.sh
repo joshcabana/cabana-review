@@ -23,12 +23,15 @@ webp() {
 
 # Hero images (home)
 webp assets/Images/HERO-BANNER.png assets/Images/HERO-BANNER.webp 85 || true
-# Mobile hero may not exist as PNG; try WEBP -> AVIF conversion if so
+# Mobile hero conversions (target ~1200px width)
+if command -v magick >/dev/null 2>&1; then
+  magick assets/Images/HERO-BANNER-mobile.webp -resize 1200x -quality 75 assets/Images/HERO-BANNER-mobile.webp 2>/dev/null || true
+fi
 if [ -f assets/Images/HERO-BANNER-mobile.png ]; then
-  webp assets/Images/HERO-BANNER-mobile.png assets/Images/HERO-BANNER-mobile.webp 85 || true
-  avif assets/Images/HERO-BANNER-mobile.png assets/Images/HERO-BANNER-mobile.avif 28 || true
+  webp assets/Images/HERO-BANNER-mobile.png assets/Images/HERO-BANNER-mobile.webp 75 || true
+  avif assets/Images/HERO-BANNER-mobile.png assets/Images/HERO-BANNER-mobile.avif 45 || true
 elif [ -f assets/Images/HERO-BANNER-mobile.webp ]; then
-  avif assets/Images/HERO-BANNER-mobile.webp assets/Images/HERO-BANNER-mobile.avif 28 || true
+  avif assets/Images/HERO-BANNER-mobile.webp assets/Images/HERO-BANNER-mobile.avif 45 || true
 fi
 avif assets/Images/HERO-BANNER.png assets/Images/HERO-BANNER.avif 28 || true
 

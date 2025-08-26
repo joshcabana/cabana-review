@@ -199,36 +199,16 @@
     >
       <!-- Background: switch to static image for best LCP -->
       <div class="absolute inset-0 z-0">
-        <!-- Image-first for fast LCP; video is revealed later when allowed -->
-        <picture id="heroImageWrap" class="absolute inset-0 block z-0">
-          <source srcset="/assets/Images/HERO-BANNER.avif 1920w, /assets/Images/HERO-BANNER-mobile.avif 768w" type="image/avif" sizes="100vw" />
-          <source srcset="
-              /assets/Images/HERO-BANNER.webp        1920w,
-              /assets/Images/HERO-BANNER-mobile.webp  768w
-            " type="image/webp" sizes="100vw" />
-          <img id="heroImageFallback" src="/assets/Images/HERO-BANNER.png" sizes="100vw" alt="" class="w-full h-full object-cover" width="1920" height="1080" fetchpriority="high" decoding="async" />
+        <!-- Mobile: static picture (LCP). Desktop: attach video after idle via JS. -->
+        <picture class="absolute inset-0 block z-0 cabana-hero-media" data-video-src="/assets/Images/HERO-BANNER-opt.mp4">
+          <!-- Desktop still (before idle video attach) -->
+          <source type="image/avif" srcset="/assets/Images/HERO-BANNER.avif" media="(min-width: 768px)" />
+          <source type="image/webp" srcset="/assets/Images/HERO-BANNER.webp" media="(min-width: 768px)" />
+          <!-- Mobile still (LCP) -->
+          <source type="image/avif" srcset="/assets/Images/HERO-BANNER-mobile.avif" media="(max-width: 767px)" />
+          <source type="image/webp" srcset="/assets/Images/HERO-BANNER-mobile.webp" media="(max-width: 767px)" />
+          <img src="/assets/Images/HERO-BANNER-mobile.avif" width="1200" height="675" fetchpriority="high" decoding="async" alt="" class="w-full h-full object-cover" />
         </picture>
-
-        <video
-          id="heroBgVideo"
-          autoplay
-          muted
-          loop
-          playsinline
-          webkit-playsinline
-          onloadedmetadata="this.muted = true; this.playsInline = true;"
-          onplay="this.playsInline = true;"
-          class="w-full h-full object-cover"
-          poster="/assets/Images/HERO-BANNER.webp"
-          data-offscreen-pause
-          preload="none"
-          style="display: none"
-          aria-hidden="true"
-        >
-          <source src="/assets/Images/HERO-BANNER-opt.mp4" type="video/mp4" media="(min-width: 768px)" />
-          <!-- Fallback for browsers that don't support video -->
-          <div class="w-full h-full bg-gradient-to-br from-slate-900 via-black to-slate-800"></div>
-        </video>
         <!-- Dark overlay for text readability -->
         <div class="absolute inset-0 bg-black/35" aria-hidden="true"></div>
       </div>
@@ -1377,6 +1357,7 @@
     <!-- Performance Optimiser Script -->
     <script src="/js/performance-optimizer.js" defer></script>
     <script src="/assets/js/lazy-philosophy.js" defer></script>
+    <script src="/assets/js/attach-hero-video.js" defer></script>
     <!-- Shared UI Enhancements (nav shadow, etc.) -->
     <script src="/js/ui.js" defer></script>
     <!-- Mobile Nav Drawer -->
