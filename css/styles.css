@@ -7,12 +7,14 @@
    =========================== */
 .font-heading {
   font-family: 'Playfair Display', serif;
+  font-display: optional;
   font-weight: 300;
 }
 
 .font-body {
   font-family:
     Inter,
+    font-display: optional,
     -apple-system,
     BlinkMacSystemFont,
     sans-serif;
