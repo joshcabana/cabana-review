@@ -1394,3 +1394,6 @@ section {
     color: black;
   }
 }
+
+/* Fallback when Tailwind spacing utilities are unavailable */
+.space-x-10 > :not([hidden]) ~ :not([hidden]) { margin-left: 2.5rem; }
