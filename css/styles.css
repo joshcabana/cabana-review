@@ -1368,11 +1368,6 @@ section {
 /* ===========================
    Print Styles
    =========================== */
-  /* Fallback spacing for nav items when Tailwind spacing utilities are unavailable */
-  .space-x-10 > * + * {
-        margin-left: 2.5rem;
-        }
-        
    @media print {
   nav,
   .cabana-cart-count,
