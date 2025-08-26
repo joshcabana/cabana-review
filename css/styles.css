@@ -1,3 +1,47 @@
+/* Moved from inline: base resets and typography */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif; background: linear-gradient(135deg, #fafaf8 0%, #f8f6f3 50%, #ffffff 100%); overflow-x: hidden; }
+.font-heading { font-family: 'Playfair Display', serif; }
+.text-gold { color: #d4af37; }
+.bg-gold { background-color: #d4af37; }
+.tracking-luxury { letter-spacing: 0.3em; }
+
+/* Navigation styles */
+.nav-wrapper { position: fixed; top: 0; left: 0; right: 0; background: rgba(0,0,0,0.95); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); z-index: 1000; border-bottom: 1px solid rgba(255,255,255,0.1); transition: all 0.2s ease-out; transform: translateY(-100%); opacity: 0; }
+.nav-wrapper.visible { transform: translateY(0); opacity: 1; }
+.nav-wrapper.nav-scrolled { background: rgba(0,0,0,0.98); box-shadow: 0 4px 20px rgba(0,0,0,0.3); -webkit-backdrop-filter: blur(15px); backdrop-filter: blur(15px); }
+
+/* Hero headline effects */
+.hero-content { animation: heroFadeUp 1.2s ease-out forwards; }
+@keyframes heroFadeUp { from { opacity: 0; transform: translateY(30px);} to { opacity: 1; transform: translateY(0);} }
+
+/* Link hover underline */
+.link-hover { position: relative; transition: color 0.3s ease; }
+.link-hover::after { content: ''; position: absolute; left: 50%; transform: translateX(-50%); bottom: -6px; height: 2px; width: 0; background: linear-gradient(90deg, transparent, #d4af37, transparent); opacity: 0; transition: width 0.3s ease, opacity 0.3s ease; }
+.link-hover:hover, .link-hover:focus-visible { color: #d4af37; }
+.link-hover:hover::after, .link-hover:focus-visible::after { width: 100%; opacity: 0.8; }
+
+/* Impact banner */
+.impact-banner { background: linear-gradient(90deg, #d4af37, #f5d061); transform: translateY(-100%); opacity: 0; transition: all 0.5s cubic-bezier(0.4,0,0.2,1); box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-bottom: 1px solid rgba(212,175,55,0.2); position: fixed; top: 0; left: 0; right: 0; z-index: 60; }
+.impact-banner.show { transform: translateY(0); opacity: 1; }
+.impact-banner.hidden { transform: translateY(-100%); opacity: 0; }
+.impact-banner-text { font-size: 0.875rem; font-weight: 500; letter-spacing: 0.05em; color: #000; }
+.impact-banner-close { opacity: 0.6; transition: opacity 0.2s ease; color: #000; }
+.impact-banner-close:hover { opacity: 1; }
+.nav-with-banner { top: 40px; }
+.nav-with-banner.nav-scrolled { top: 0; transition: top 0.3s ease-out; }
+
+/* Below-the-fold virtualization (kept) */
+section[aria-labelledby='mid-newsletter-heading'],
+section[aria-labelledby='collection-heading'],
+section[aria-labelledby='impact-heading'],
+section[aria-labelledby='newsletter-heading'] { content-visibility: auto; contain-intrinsic-size: 800px 1000px; }
+
+/* Philosophy virtualization for mobile */
+@media (max-width: 767px) {
+  .philosophy { content-visibility: auto; contain-intrinsic-size: 600px; }
+  .philosophy-bg { background: #0a0a0a !important; display: none; }
+}
 /* Philosophy virtualization for mobile */
 @media (max-width: 767px) {
   .philosophy { content-visibility: auto; contain-intrinsic-size: 600px; }
