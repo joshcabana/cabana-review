@@ -86,6 +86,9 @@
     <link rel="preload" href="/css/styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/css/styles.css"></noscript>
 
+    <!-- Optional: Preload mobile LCP still -->
+    <link rel="preload" as="image" href="/assets/Images/HERO-BANNER-mobile-1024.avif" imagesrcset="/assets/Images/HERO-BANNER-mobile-1024.avif" imagesizes="100vw" />
+
     <!-- REMOVED: duplicate OG/Twitter block to keep one clean OG set only -->
 
     <!-- Structured Data for SEO -->
@@ -201,13 +204,10 @@
       <div class="absolute inset-0 z-0">
         <!-- Mobile: static picture (LCP). Desktop: attach video after idle via JS. -->
         <picture class="absolute inset-0 block z-0 cabana-hero-media" data-video-src="/assets/Images/HERO-BANNER-opt.mp4">
-          <!-- Desktop still (before idle video attach) -->
-          <source type="image/avif" srcset="/assets/Images/HERO-BANNER.avif" media="(min-width: 768px)" />
-          <source type="image/webp" srcset="/assets/Images/HERO-BANNER.webp" media="(min-width: 768px)" />
-          <!-- Mobile still (LCP) -->
-          <source type="image/avif" srcset="/assets/Images/HERO-BANNER-mobile.avif" media="(max-width: 767px)" />
-          <source type="image/webp" srcset="/assets/Images/HERO-BANNER-mobile.webp" media="(max-width: 767px)" />
-          <img src="/assets/Images/HERO-BANNER-mobile.avif" width="1200" height="675" fetchpriority="high" decoding="async" alt="" class="w-full h-full object-cover" />
+          <!-- Mobile still (LCP) only -->
+          <source type="image/avif" srcset="/assets/Images/HERO-BANNER-mobile-1024.avif" media="(max-width: 767px)" />
+          <source type="image/webp" srcset="/assets/Images/HERO-BANNER-mobile-1024.webp" media="(max-width: 767px)" />
+          <img src="/assets/Images/HERO-BANNER-mobile-1024.avif" width="1200" height="675" sizes="100vw" fetchpriority="high" decoding="async" alt="" class="w-full h-full object-cover" />
         </picture>
         <!-- Dark overlay for text readability -->
         <div class="absolute inset-0 bg-black/35 hero-overlay" aria-hidden="true"></div>
