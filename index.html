@@ -1294,7 +1294,11 @@
             }, 3500);
           }
         };
-        if ('requestIdleCallback' in window) { requestIdleCallback(startCarousel); } else { setTimeout(startCarousel, 1); }
+        // Disable carousel on mobile to reduce first-paint script cost
+        const isMobile = window.matchMedia('(max-width: 767px)').matches;
+        if (!isMobile) {
+          if ('requestIdleCallback' in window) { requestIdleCallback(startCarousel); } else { setTimeout(startCarousel, 1); }
+        }
 
         // Video optimisation: image-first LCP; reveal/play video only when appropriate
         const heroVideo = document.getElementById('heroBgVideo');

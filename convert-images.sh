@@ -66,14 +66,14 @@ if command -v magick >/dev/null 2>&1; then
     magick assets/Images/HERO-BANNER-mobile.png -resize 960x -quality 38 assets/Images/HERO-BANNER-mobile-960.avif 2>/dev/null || true
   elif [ -f assets/Images/HERO-BANNER-mobile.webp ]; then
     magick assets/Images/HERO-BANNER-mobile.webp -resize 960x -quality 70 assets/Images/HERO-BANNER-mobile-960.webp 2>/dev/null || true
-    magick assets/Images/HERO-BANNER-mobile.webp -resize 960x -quality 32 assets/Images/HERO-BANNER-mobile-960.avif 2>/dev/null || true
+    magick assets/Images/HERO-BANNER-mobile.webp -resize 960x -quality 30 assets/Images/HERO-BANNER-mobile-960.avif 2>/dev/null || true
   fi
 else
   if [ -f assets/Images/HERO-BANNER-mobile.png ]; then
     webp assets/Images/HERO-BANNER-mobile.png assets/Images/HERO-BANNER-mobile-960.webp 70 || true
-    avif assets/Images/HERO-BANNER-mobile.png assets/Images/HERO-BANNER-mobile-960.avif 32 || true
+    avif assets/Images/HERO-BANNER-mobile.png assets/Images/HERO-BANNER-mobile-960.avif 30 || true
   elif [ -f assets/Images/HERO-BANNER-mobile.webp ]; then
-    avif assets/Images/HERO-BANNER-mobile.webp assets/Images/HERO-BANNER-mobile-960.avif 32 || true
+    avif assets/Images/HERO-BANNER-mobile.webp assets/Images/HERO-BANNER-mobile-960.avif 30 || true
   fi
 fi
 echo "Image conversion complete!"
