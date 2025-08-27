@@ -62,11 +62,11 @@ fi
 # Also produce 960px variants for extra-small devices/perf
 if command -v magick >/dev/null 2>&1; then
   if [ -f assets/Images/HERO-BANNER-mobile.png ]; then
-    magick assets/Images/HERO-BANNER-mobile.png -resize 960x -quality 70 assets/Images/HERO-BANNER-mobile-960.webp 2>/dev/null || true
-    magick assets/Images/HERO-BANNER-mobile.png -resize 960x -quality 38 assets/Images/HERO-BANNER-mobile-960.avif 2>/dev/null || true
+    magick assets/Images/HERO-BANNER-mobile.png -resize 960x540^ -gravity center -extent 960x540 -quality 70 assets/Images/HERO-BANNER-mobile-960.webp 2>/dev/null || true
+    magick assets/Images/HERO-BANNER-mobile.png -resize 960x540^ -gravity center -extent 960x540 -quality 30 assets/Images/HERO-BANNER-mobile-960.avif 2>/dev/null || true
   elif [ -f assets/Images/HERO-BANNER-mobile.webp ]; then
-    magick assets/Images/HERO-BANNER-mobile.webp -resize 960x -quality 70 assets/Images/HERO-BANNER-mobile-960.webp 2>/dev/null || true
-    magick assets/Images/HERO-BANNER-mobile.webp -resize 960x -quality 30 assets/Images/HERO-BANNER-mobile-960.avif 2>/dev/null || true
+    magick assets/Images/HERO-BANNER-mobile.webp -resize 960x540^ -gravity center -extent 960x540 -quality 70 assets/Images/HERO-BANNER-mobile-960.webp 2>/dev/null || true
+    magick assets/Images/HERO-BANNER-mobile.webp -resize 960x540^ -gravity center -extent 960x540 -quality 30 assets/Images/HERO-BANNER-mobile-960.avif 2>/dev/null || true
   fi
 else
   if [ -f assets/Images/HERO-BANNER-mobile.png ]; then
