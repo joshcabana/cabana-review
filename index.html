@@ -208,8 +208,7 @@
           <source type="image/webp" srcset="/assets/Images/HERO-BANNER-mobile-960.webp" media="(max-width: 767px)" />
           <img src="/assets/Images/HERO-BANNER-mobile-960.avif" width="1200" height="675" sizes="100vw" fetchpriority="high" alt="" class="w-full h-full object-cover" />
         </picture>
-        <!-- Dark overlay for text readability -->
-        <div class="absolute inset-0 bg-black/35 hero-overlay" aria-hidden="true"></div>
+        
       </div>
 
       <!-- Hero Content -->
@@ -1271,28 +1270,31 @@
       // Make newsletter function globally available
       window.subscribeNewsletter = subscribeNewsletter;
 
-      // Hero: Text carousel and video optimisation
+      // Hero: Text carousel (idle) and video optimisation
       document.addEventListener('DOMContentLoaded', function () {
-        // Text carousel phrases (avoid the word often overused by premium brands)
-        const phrases = [
-          'Quiet refinement, worn every day',
-          'Sustainably crafted. Designed to last',
-          'Considered materials, considered impact',
-          'Comfort that contributes',
-        ];
-        const el = document.getElementById('heroTextCarousel');
-        if (el) {
-          let idx = 0;
-          el.textContent = phrases[idx];
-          setInterval(() => {
-            idx = (idx + 1) % phrases.length;
-            el.style.opacity = '0';
-            setTimeout(() => {
-              el.textContent = phrases[idx];
-              el.style.opacity = '1';
-            }, 250);
-          }, 3500);
-        }
+        // Defer carousel to idle to avoid impacting first paint
+        const startCarousel = () => {
+          const phrases = [
+            'Quiet refinement, worn every day',
+            'Sustainably crafted. Designed to last',
+            'Considered materials, considered impact',
+            'Comfort that contributes',
+          ];
+          const el = document.getElementById('heroTextCarousel');
+          if (el) {
+            let idx = 0;
+            el.textContent = phrases[idx];
+            setInterval(() => {
+              idx = (idx + 1) % phrases.length;
+              el.style.opacity = '0';
+              setTimeout(() => {
+                el.textContent = phrases[idx];
+                el.style.opacity = '1';
+              }, 250);
+            }, 3500);
+          }
+        };
+        if ('requestIdleCallback' in window) { requestIdleCallback(startCarousel); } else { setTimeout(startCarousel, 1); }
 
         // Video optimisation: image-first LCP; reveal/play video only when appropriate
         const heroVideo = document.getElementById('heroBgVideo');
