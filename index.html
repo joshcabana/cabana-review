@@ -30,8 +30,7 @@
     <meta name="twitter:description" content="Premium essentials. 10% of every purchase supports men's mental health and women's empowerment." />
     <meta name="twitter:image" content="https://cabanacollections.com.au/assets/Images/HERO-BANNER.png" />
 
-    <!-- Requested preloads -->
-    <link rel="preload" as="image" href="/assets/Images/HERO-BANNER.webp" fetchpriority="high" />
+    <!-- Requested preloads (keep minimal; do not preload mobile hero still) -->
 
     <!-- ========== ANALYTICS ========== -->
     <!-- Google Analytics loader + deferred init -->
@@ -49,8 +48,6 @@
     
 
     <!-- 2. Preload Critical Resources -->
-    <!-- LCP image preload — HOME ONLY -->
-    <link rel="preload" as="image" href="/assets/Images/HERO-BANNER.webp" imagesrcset="/assets/Images/HERO-BANNER-mobile.webp 768w, /assets/Images/HERO-BANNER.webp 1920w" imagesizes="100vw" />
 
     <!-- 3. Critical Inline CSS (above-the-fold styles) -->
     <style>
@@ -204,9 +201,9 @@
         <!-- Mobile: static picture (LCP). Desktop: attach video after idle via JS. -->
         <picture class="absolute inset-0 block z-0 cabana-hero-media" data-video-src="/assets/Images/HERO-BANNER-opt.mp4">
           <!-- Mobile still (LCP) only -->
-          <source type="image/avif" srcset="/assets/Images/HERO-BANNER-mobile-960.avif" media="(max-width: 767px)" />
-          <source type="image/webp" srcset="/assets/Images/HERO-BANNER-mobile-960.webp" media="(max-width: 767px)" />
-          <img src="/assets/Images/HERO-BANNER-mobile-960.avif" width="1200" height="675" sizes="100vw" fetchpriority="high" alt="" class="w-full h-full object-cover" />
+          <source type="image/avif" srcset="/assets/Images/HERO-BANNER-mobile-900.avif" media="(max-width: 767px)" />
+          <source type="image/webp" srcset="/assets/Images/HERO-BANNER-mobile-900.webp" media="(max-width: 767px)" />
+          <img src="/assets/Images/HERO-BANNER-mobile-900.avif" width="1200" height="675" sizes="100vw" fetchpriority="high" alt="" class="w-full h-full object-cover" />
         </picture>
         
       </div>
@@ -1423,8 +1420,6 @@
         });
         resizeObserver.observe(document.documentElement);
       }
-    
-      <script src="/assets/js/animate.js" defer></script>
-  <script src="/js/ga.jsscript></script>
+    </script>
   </body>
 </html>

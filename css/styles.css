@@ -49,6 +49,12 @@ section[aria-labelledby='newsletter-heading'] { content-visibility: auto; contai
   .philosophy--mounted { content-visibility: visible; }
   .philosophy-bg { display: none; }
 }
+/* Mobile: force solid background and disable texture/gradient to reduce paint */
+@media (max-width: 767px) {
+  body { background: #fafaf8 !important; }
+  .gradient-champagne-sage { background: #fafaf8 !important; }
+  .luxe-texture::before { display: none !important; }
+}
 /* Philosophy virtualization for mobile */
 @media (max-width: 767px) {
   .philosophy { content-visibility: auto; contain-intrinsic-size: 600px; }
