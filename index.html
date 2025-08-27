@@ -80,8 +80,11 @@
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400&family=Inter:wght@400&display=optional" as="style" />
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400&family=Inter:wght@400&display=optional" rel="stylesheet" media="print" onload="this.media='all'" />
 
-    <!-- 6. Tailwind CSS (built) -->
-    <link rel="stylesheet" href="/css/tw.out.css" />
+    <!-- 6. Critical Home CSS (blocking, tiny) -->
+    <link rel="stylesheet" href="/css/critical-home.css" />
+    <!-- Defer Tailwind CSS to avoid render-blocking on mobile -->
+    <link rel="preload" href="/css/tw.out.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/css/tw.out.css"></noscript>
     <!-- Defer custom stylesheet to avoid render-blocking -->
     <link rel="preload" href="/css/styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/css/styles.css"></noscript>
@@ -141,13 +144,13 @@
     >
 
     <!-- New Sticky Header + Mobile Drawer -->
-    <header class="sticky-header" role="banner" id="mainNav">
-      <div class="max-w-7xl mx-auto px-6 md:px-12 py-4 flex items-center justify-between">
+    <header class="sticky-header site-header" role="banner" id="mainNav">
+      <div class="max-w-7xl mx-auto px-6 md:px-12 py-4 flex items-center justify-between nav-row">
         <a href="/" class="font-heading tracking-luxury font-light leading-tight">
           <span class="block text-2xl">CABANA</span>
           <span class="block text-xs tracking-wider -mt-0.5">Collections</span>
         </a>
-        <nav class="hidden md:flex items-center gap-10" aria-label="Primary">
+        <nav class="hidden md:flex items-center gap-10 nav-links" aria-label="Primary">
           <a href="/" class="link-hover text-xs tracking-widest" aria-current="page">HOME</a>
           <a href="/products/mens-boxer-brief-black.html" class="link-hover text-xs tracking-widest"
             >MEN</a
