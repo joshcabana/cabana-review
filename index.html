@@ -117,7 +117,7 @@
           onclick="dismissImpactBanner()"
           aria-label="Close impact banner"
         >
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
             <path
               stroke-linecap="round"
               stroke-linejoin="round"
@@ -157,7 +157,7 @@
           <a href="/cart.html" aria-label="Cart" class="hidden md:inline">🛒</a>
           <a href="#" data-login-open class="hidden md:inline text-xs tracking-widest">Login</a>
           <button class="md:hidden p-2" aria-label="Open menu" data-mobile-open>
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path
                 stroke-linecap="round"
                 stroke-linejoin="round"
@@ -350,7 +350,7 @@
                 <div
                   class="flex items-center gap-2 bg-green-600/20 text-green-400 px-4 py-2 rounded-full border border-green-500/30"
                 >
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <path
                       stroke-linecap="round"
                       stroke-linejoin="round"
@@ -363,7 +363,7 @@
                 <div
                   class="flex items-center gap-2 bg-blue-600/20 text-blue-400 px-4 py-2 rounded-full border border-blue-500/30"
                 >
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <path
                       stroke-linecap="round"
                       stroke-linejoin="round"
@@ -376,7 +376,7 @@
                 <div
                   class="flex items-center gap-2 bg-pink-600/20 text-pink-400 px-4 py-2 rounded-full border border-pink-500/30"
                 >
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <path
                       stroke-linecap="round"
                       stroke-linejoin="round"
@@ -389,7 +389,7 @@
                 <div
                   class="flex items-center gap-2 bg-amber-600/20 text-amber-400 px-4 py-2 rounded-full border border-amber-500/30"
                 >
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <path
                       stroke-linecap="round"
                       stroke-linejoin="round"
@@ -1291,8 +1291,8 @@
           }
         };
         // Disable carousel on mobile to reduce first-paint script cost
-        const isMobile = window.matchMedia('(max-width: 767px)').matches;
-        if (!isMobile) {
+        const isMobileCarousel = window.matchMedia('(max-width: 767px)').matches;
+        if (!isMobileCarousel) {
           if ('requestIdleCallback' in window) { requestIdleCallback(startCarousel); } else { setTimeout(startCarousel, 1); }
         }
 
@@ -1366,7 +1366,7 @@
 
     <!-- Error Handling and Debugging -->
     <script>
-      // Global error handler
+      // Global error handler (always keep errors)
       window.addEventListener('error', function (e) {
         console.error('Page Error:', e.error);
         console.error('Line:', e.lineno, 'Column:', e.colno);
@@ -1375,6 +1375,16 @@
 
       // Check if all sections are properly loaded
       document.addEventListener('DOMContentLoaded', function () {
+        // Gate non-essential console logs to development only
+        (function(){
+          var isDev = /^(localhost|127\.0\.0\.1)$/i.test(location.hostname);
+          if (!isDev) {
+            var noop = function(){};
+            console.log = noop;
+            console.info = noop;
+            // keep warn/error
+          }
+        })();
         const sections = {
           hero: document.getElementById('heroSection'),
           philosophy: document.querySelector('[aria-labelledby="philosophy-heading"]'),
