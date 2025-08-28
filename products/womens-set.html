@@ -333,8 +333,7 @@ doctype html>
     <!-- UPDATED: global stylesheet -->
     <link rel="preload" href="/css/styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/css/styles.css"></noscript>
-    <link rel="stylesheet" href="/css/optimized/lazy-loading.css" />
-    <link rel="stylesheet" href="/css/optimized/performance.css" />
+    
     <!-- Shared UI Enhancements -->
     <script src="/js/ui.js" defer></script>
     <script src="/assets/js/flags.js" defer></script>
@@ -951,11 +950,39 @@ doctype html>
       Swipe to view • Pinch to zoom
     </div>
 
+    <script>
+      // Gate Fabric video on mobile and only load sources when visible on desktop
+      document.addEventListener('DOMContentLoaded', function(){
+        const video = document.getElementById('fabricVideo');
+        if(!video) return;
+        const isMobile = window.matchMedia('(max-width: 767px)').matches;
+        const saveData = navigator.connection && navigator.connection.saveData;
+        const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if(isMobile || saveData || prefersReduced){
+          try { video.pause(); } catch(_){}
+          video.removeAttribute('autoplay');
+          return;
+        }
+        if('IntersectionObserver' in window){
+          const obs = new IntersectionObserver((entries)=>{
+            entries.forEach((e)=>{
+              if(e.isIntersecting){
+                const src = video.querySelector('source[data-src]');
+                if(src && !src.src){ src.src = src.getAttribute('data-src'); video.load(); }
+                video.play().catch(()=>{});
+                obs.disconnect();
+              }
+            });
+          }, { rootMargin: '200px 0px', threshold: 0.01 });
+          obs.observe(video);
+        }
+      });
+    </script>
+
     <!-- The Fabric (Video) -->
     <section class="py-16 md:py-24 relative overflow-hidden" aria-labelledby="fabric-heading">
       <div class="absolute inset-0 z-0">
         <video
-          autoplay
           muted
           loop
           playsinline
@@ -963,9 +990,10 @@ doctype html>
           class="w-full h-full object-cover"
           poster="/assets/Images/CABANA-WOMEN.webp"
           data-offscreen-pause
-          preload="metadata"
+          preload="none"
+          id="fabricVideo"
         >
-          <source src="/assets/Images/Women.mp4" type="video/mp4" />
+          <source data-src="/assets/Images/Women.mp4" type="video/mp4" />
         </video>
         <div class="absolute inset-0 bg-gradient-to-b from-black/30 via-black/10 to-black/40" aria-hidden="true"></div>
       </div>
