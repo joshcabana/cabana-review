@@ -53,7 +53,7 @@ doctype html>
       }
       body {
         font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif;
-        background: linear-gradient(135deg, #fafaf8 0%, #f8f6f3 50%, #ffffff 100%);
+        background: #ffffff;
         overflow-x: hidden;
       }
       .font-heading {
@@ -326,6 +326,10 @@ doctype html>
           transition: none !important;
         }
       }
+    </style>
+    <style>
+      /* Virtualize below-the-fold sections to cut initial render cost */
+      section[aria-labelledby='impact-heading']{ content-visibility:auto; contain-intrinsic-size: 1200px; }
     </style>
 
     <!-- Tailwind CSS (built) -->
