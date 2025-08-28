@@ -566,11 +566,11 @@
                 loop
                 playsinline
                 webkit-playsinline
-                preload="metadata"
+                preload="none"
                 aria-describedby="video-instruction"
               >
-                <source src="../assets/Images/CABANA-BOXERS-360-Desktop.mp4" media="(min-width: 768px)" type="video/mp4" />
-                <source src="../assets/Images/CABANA-BOXERS-360-Mobile.mp4" media="(max-width: 767px)" type="video/mp4" />
+                <source data-src="../assets/Images/CABANA-BOXERS-360-Desktop.mp4" media="(min-width: 768px)" type="video/mp4" />
+                <source data-src="../assets/Images/CABANA-BOXERS-360-Mobile.mp4" media="(max-width: 767px)" type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
 
@@ -1759,10 +1759,11 @@
         videoThumbnail.classList.remove('border-gray-200');
         videoThumbnail.setAttribute('aria-pressed', 'true');
 
-        // Start video
-        mainVideo.play().catch((e) => {
-          console.log('Video autoplay prevented:', e);
-        });
+        // Lazy attach sources and start video
+        const sources = mainVideo.querySelectorAll('source[data-src]');
+        sources.forEach((s)=>{ if(!s.src){ s.src = s.getAttribute('data-src'); } });
+        mainVideo.load();
+        mainVideo.play().catch(()=>{});
 
         // Track video view
         if (typeof gtag !== 'undefined') {
