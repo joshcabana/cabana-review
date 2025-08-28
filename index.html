@@ -58,6 +58,11 @@
         align-items: center;
         justify-content: center;
         position: relative;
+        background-color: #0a0a0a;
+      }
+      /* Micro mobile paint reduction: disable luxe texture overlay before deferred CSS */
+      @media (max-width: 767px){
+        .luxe-texture::before{ display: none !important; }
       }
     </style>
 
