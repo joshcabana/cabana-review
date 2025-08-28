@@ -114,4 +114,15 @@ else
 fi
 echo "Image conversion complete!"
 
+# Favicons and touch icons (if base logo exists)
+if command -v magick >/dev/null 2>&1; then
+  if [ -f assets/Images/CABANA-Logo-06.jpg ]; then
+    magick assets/Images/CABANA-Logo-06.jpg -resize 32x32 assets/Images/favicon-32x32.png 2>/dev/null || true
+    magick assets/Images/CABANA-Logo-06.jpg -resize 16x16 assets/Images/favicon-16x16.png 2>/dev/null || true
+    magick assets/Images/CABANA-Logo-06.jpg -resize 192x192 assets/Images/favicon-192x192.png 2>/dev/null || true
+    magick assets/Images/CABANA-Logo-06.jpg -resize 512x512 assets/Images/favicon-512x512.png 2>/dev/null || true
+    magick assets/Images/CABANA-Logo-06.jpg -resize 180x180 assets/Images/apple-touch-icon.png 2>/dev/null || true
+  fi
+fi
+
 
