@@ -1018,6 +1018,7 @@ doctype html>
     <section
       class="py-20 bg-gradient-to-br from-gray-50 via-white to-gray-100 relative overflow-hidden"
       aria-labelledby="impact-heading"
+      id="womenImpact"
     >
       <!-- Luxury Background Elements -->
       <div class="absolute inset-0 opacity-5">
@@ -2075,8 +2076,13 @@ doctype html>
         if (window.innerWidth <= 768) {
           initializeMobileStickyBar();
         }
-        if (document.getElementById('currentQty')) {
-          new ResearchBasedImpactCalculator();
+        // Mount impact calculator only when visible
+        const impact = document.getElementById('womenImpact');
+        if('IntersectionObserver' in window && impact){
+          const obs = new IntersectionObserver((entries)=>{
+            entries.forEach((e)=>{ if(e.isIntersecting){ if (document.getElementById('currentQty')) { new ResearchBasedImpactCalculator(); } obs.disconnect(); } });
+          }, { rootMargin: '200px 0px', threshold: 0.01 });
+          obs.observe(impact);
         }
         updateCartCount();
 
