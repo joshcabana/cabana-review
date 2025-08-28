@@ -52,6 +52,27 @@ avif assets/Images/CABANA-BOXERS-SIDE.png assets/Images/CABANA-BOXERS-SIDE.avif 
 avif assets/Images/CABANA-BOXERS-BACK.png assets/Images/CABANA-BOXERS-BACK.avif 28 || true
 avif assets/Images/CABANA-WOMEN.PNG assets/Images/CABANA-WOMEN.avif 28 || true
 
+# Scaled 900px variants for LCP images (products)
+if command -v magick >/dev/null 2>&1; then
+  if [ -f assets/Images/CABANA-BOXERS-FRONT.png ]; then
+    magick assets/Images/CABANA-BOXERS-FRONT.png -resize 900x -quality 70 assets/Images/CABANA-BOXERS-FRONT-900.webp 2>/dev/null || true
+    magick assets/Images/CABANA-BOXERS-FRONT.png -resize 900x -quality 28 assets/Images/CABANA-BOXERS-FRONT-900.avif 2>/dev/null || true
+  fi
+  if [ -f assets/Images/CABANA-WOMEN.PNG ]; then
+    magick assets/Images/CABANA-WOMEN.PNG -resize 900x -quality 70 assets/Images/CABANA-WOMEN-900.webp 2>/dev/null || true
+    magick assets/Images/CABANA-WOMEN.PNG -resize 900x -quality 28 assets/Images/CABANA-WOMEN-900.avif 2>/dev/null || true
+  fi
+else
+  if [ -f assets/Images/CABANA-BOXERS-FRONT.png ]; then
+    webp assets/Images/CABANA-BOXERS-FRONT.png assets/Images/CABANA-BOXERS-FRONT-900.webp 70 || true
+    avif assets/Images/CABANA-BOXERS-FRONT.png assets/Images/CABANA-BOXERS-FRONT-900.avif 28 || true
+  fi
+  if [ -f assets/Images/CABANA-WOMEN.PNG ]; then
+    webp assets/Images/CABANA-WOMEN.PNG assets/Images/CABANA-WOMEN-900.webp 70 || true
+    avif assets/Images/CABANA-WOMEN.PNG assets/Images/CABANA-WOMEN-900.avif 28 || true
+  fi
+fi
+
 # Create poster frame for towel video (needs ffmpeg)
 if command -v ffmpeg >/dev/null 2>&1; then
   ffmpeg -y -i assets/Images/TowelTease.mp4 -ss 00:00:01 -frames:v 1 assets/Images/towel-poster.jpg
