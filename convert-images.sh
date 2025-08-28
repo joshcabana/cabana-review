@@ -94,6 +94,24 @@ else
     avif assets/Images/HERO-BANNER-mobile.webp assets/Images/HERO-BANNER-mobile-900.avif 28 || true
   fi
 fi
+
+# Produce 840px variants for even lighter mobile
+if command -v magick >/dev/null 2>&1; then
+  if [ -f assets/Images/HERO-BANNER-mobile.png ]; then
+    magick assets/Images/HERO-BANNER-mobile.png -resize 840x473^ -gravity center -extent 840x473 -quality 68 assets/Images/HERO-BANNER-mobile-840.webp 2>/dev/null || true
+    magick assets/Images/HERO-BANNER-mobile.png -resize 840x473^ -gravity center -extent 840x473 -quality 28 assets/Images/HERO-BANNER-mobile-840.avif 2>/dev/null || true
+  elif [ -f assets/Images/HERO-BANNER-mobile.webp ]; then
+    magick assets/Images/HERO-BANNER-mobile.webp -resize 840x473^ -gravity center -extent 840x473 -quality 68 assets/Images/HERO-BANNER-mobile-840.webp 2>/dev/null || true
+    magick assets/Images/HERO-BANNER-mobile.webp -resize 840x473^ -gravity center -extent 840x473 -quality 28 assets/Images/HERO-BANNER-mobile-840.avif 2>/dev/null || true
+  fi
+else
+  if [ -f assets/Images/HERO-BANNER-mobile.png ]; then
+    webp assets/Images/HERO-BANNER-mobile.png assets/Images/HERO-BANNER-mobile-840.webp 68 || true
+    avif assets/Images/HERO-BANNER-mobile.png assets/Images/HERO-BANNER-mobile-840.avif 28 || true
+  elif [ -f assets/Images/HERO-BANNER-mobile.webp ]; then
+    avif assets/Images/HERO-BANNER-mobile.webp assets/Images/HERO-BANNER-mobile-840.avif 28 || true
+  fi
+fi
 echo "Image conversion complete!"
 
 
