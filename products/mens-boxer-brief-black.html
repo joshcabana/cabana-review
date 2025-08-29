@@ -557,7 +557,7 @@
                   fetchpriority="high" width="600" height="800"
                   tabindex="0"
                   aria-describedby="image-zoom-instruction"
-                  sizes="(min-width: 1024px) 600px, (min-width: 768px) 50vw, 90vw"
+                  sizes="(min-width: 1024px) 600px, (min-width: 768px) 50vw, 85vw"
                 />
               </picture>
 
@@ -2379,18 +2379,22 @@
         // Initialize bundles
         initializeBundles();
 
-        // Only initialize if impact calculator elements exist
-        if (document.getElementById('currentQty')) {
-          const calculator = new ResearchBasedImpactCalculator();
-          calculator.updateTrustSignals();
-
-          // Track calculator page view
-          if (typeof gtag !== 'undefined') {
-            gtag('event', 'impact_calculator_view', {
-              page_title: 'Product Impact Calculator',
-              page_location: window.location.href,
-            });
-          }
+        // Defer calculator init until menImpact is visible
+        const menImpact = document.getElementById('menImpact');
+        if('IntersectionObserver' in window && menImpact){
+          const obs = new IntersectionObserver((entries)=>{
+            entries.forEach((e)=>{ if(e.isIntersecting){
+              if (document.getElementById('currentQty')) {
+                const calculator = new ResearchBasedImpactCalculator();
+                calculator.updateTrustSignals();
+                if (typeof gtag !== 'undefined') {
+                  gtag('event', 'impact_calculator_view', { page_title: 'Product Impact Calculator', page_location: window.location.href });
+                }
+              }
+              obs.disconnect();
+            }});
+          }, { rootMargin: '200px 0px', threshold: 0.01 });
+          obs.observe(menImpact);
         }
       });
     </script>
