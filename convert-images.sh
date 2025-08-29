@@ -52,6 +52,14 @@ avif assets/Images/CABANA-BOXERS-SIDE.png assets/Images/CABANA-BOXERS-SIDE.avif 
 avif assets/Images/CABANA-BOXERS-BACK.png assets/Images/CABANA-BOXERS-BACK.avif 28 || true
 avif assets/Images/CABANA-WOMEN.PNG assets/Images/CABANA-WOMEN.avif 28 || true
 
+# Additional women's images to WebP/AVIF
+webp assets/Images/CABANA-WOMEN2.PNG assets/Images/CABANA-WOMEN2.webp 85 || true
+webp assets/Images/CABANA-WOMEN3.PNG assets/Images/CABANA-WOMEN3.webp 85 || true
+webp assets/Images/CABANA-WOMEN4.PNG assets/Images/CABANA-WOMEN4.webp 85 || true
+avif assets/Images/CABANA-WOMEN2.PNG assets/Images/CABANA-WOMEN2.avif 28 || true
+avif assets/Images/CABANA-WOMEN3.PNG assets/Images/CABANA-WOMEN3.avif 28 || true
+avif assets/Images/CABANA-WOMEN4.PNG assets/Images/CABANA-WOMEN4.avif 28 || true
+
 # Scaled 900px variants for LCP images (products)
 if command -v magick >/dev/null 2>&1; then
   if [ -f assets/Images/CABANA-BOXERS-FRONT.png ]; then
