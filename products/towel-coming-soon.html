@@ -29,8 +29,9 @@
     <!-- Tailwind CSS (built) -->
     <link rel="stylesheet" href="/css/tw.out.css" />
 
-    <!-- Global styles (optional) -->
-    <link rel="stylesheet" href="/css/styles.css" />
+    <!-- Global styles (deferred) -->
+    <link rel="preload" href="/css/styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/css/styles.css"></noscript>
   </head>
   <body class="bg-black text-white min-h-screen">
     <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-white text-black px-4 py-2 z-50 rounded">Skip to main content</a>
@@ -45,11 +46,10 @@
         loop
         playsinline
         webkit-playsinline
-        poster="/assets/Images/towel-poster.jpg"
+        poster="/assets/Images/towel-poster.webp"
+        preload="none"
       >
-        <!-- Provide both filename variants to maximize compatibility -->
-        <source src="/assets/Images/TowelTease.mp4" type="video/mp4" />
-        <source src="/assets/Images/TowelTease.mp4" type="video/mp4" />
+        <source src="/assets/Images/TowelTease-opt.mp4" type="video/mp4" />
       </video>
       <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-black/20" aria-hidden="true"></div>
 
@@ -203,7 +203,9 @@
         });
       })();
     </script>
-  </body>
-  </html>
+    <script src="/assets/js/animate.js" defer></script>
+  <script src="/assets/js/ga.js" defer></script>
+</body>
+</html>>
 
 

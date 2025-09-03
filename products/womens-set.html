@@ -1,4 +1,7 @@
-<!doctype html>
+<
+
+
+doctype html>
 <html lang="en-AU" class="scroll-smooth">
   <head>
     <!-- UPDATED: canonical -->
@@ -34,15 +37,12 @@
     <!-- Resource Hints -->
     <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
     <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
-    <link rel="dns-prefetch" href="https://cdn.tailwindcss.com" />
-    <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+    
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin />
-    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
+    
 
-    <!-- Preload LCP image -->
-    <link rel="preload" as="image" href="../assets/Images/CABANA-WOMEN.PNG" />
+    
 
     <!-- Critical CSS -->
     <style>
@@ -53,7 +53,7 @@
       }
       body {
         font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif;
-        background: linear-gradient(135deg, #fafaf8 0%, #f8f6f3 50%, #ffffff 100%);
+        background: #ffffff;
         overflow-x: hidden;
       }
       .font-heading {
@@ -327,13 +327,17 @@
         }
       }
     </style>
+    <style>
+      /* Virtualize below-the-fold sections to cut initial render cost */
+      section[aria-labelledby='impact-heading']{ content-visibility:auto; contain-intrinsic-size: 1200px; }
+    </style>
 
     <!-- Tailwind CSS (built) -->
     <link rel="stylesheet" href="/css/tw.out.css" />
     <!-- UPDATED: global stylesheet -->
-    <link rel="stylesheet" href="/css/styles.css" />
-    <link rel="stylesheet" href="/css/optimized/lazy-loading.css" />
-    <link rel="stylesheet" href="/css/optimized/performance.css" />
+    <link rel="preload" href="/css/styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/css/styles.css"></noscript>
+    
     <!-- Shared UI Enhancements -->
     <script src="/js/ui.js" defer></script>
     <script src="/assets/js/flags.js" defer></script>
@@ -342,7 +346,7 @@
 
     <!-- Fonts -->
     <link
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@100;200;300;400;500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400&family=Inter:wght@400&display=optional"
       rel="stylesheet"
       media="print"
       onload="this.media='all'"
@@ -518,17 +522,18 @@
             <!-- Main Image with Zoom -->
             <div class="product-image aspect-[3/4] relative group">
               <picture>
-                <source srcset="../assets/Images/CABANA-WOMEN.webp" type="image/webp" />
+                <source srcset="../assets/Images/CABANA-WOMEN-900.avif" type="image/avif" />
+                <source srcset="../assets/Images/CABANA-WOMEN-900.webp" type="image/webp" />
                 <img
                   id="mainImage"
-                  src="../assets/Images/CABANA-WOMEN.PNG"
+                  src="../assets/Images/CABANA-WOMEN.webp"
                   alt="Women's Essential Set - Front view"
                   class="w-full h-full object-cover zoomable-image"
-                  decoding="async" fetchpriority="high" width="600" height="800"
+                  fetchpriority="high" width="600" height="800"
                   tabindex="0"
                   role="img"
                   aria-describedby="image-zoom-instruction"
-                  sizes="(min-width: 1024px) 600px, (min-width: 768px) 50vw, 100vw"
+                  sizes="(min-width: 1024px) 600px, (min-width: 768px) 50vw, 90vw"
                 />
               </picture>
               <span id="image-zoom-instruction" class="sr-only"
@@ -547,54 +552,54 @@
             <div class="grid grid-cols-4 gap-3">
               <button
                 class="thumbnail active border-2 border-black focus:outline-none focus:ring-2 focus:ring-gold"
-                onclick="changeImage('../assets/Images/CABANA-WOMEN.PNG', 'Front view', this)"
+                onclick="changeImage('../assets/Images/CABANA-WOMEN.webp', 'Front view', this)"
                 aria-label="View front image"
                 aria-pressed="true"
               >
                 <img
-                  src="../assets/Images/CABANA-WOMEN.PNG"
+                  src="../assets/Images/CABANA-WOMEN.webp"
                   alt="Women's set – front view"
                   class="w-full aspect-square object-cover"
-                  loading="lazy"
+                  loading="lazy" decoding="async"
                 />
               </button>
               <button
                 class="thumbnail border-2 border-gray-200 focus:outline-none focus:ring-2 focus:ring-gold"
-                onclick="changeImage('../assets/Images/CABANA-WOMEN2.PNG', 'Side view', this)"
+                onclick="changeImage('../assets/Images/CABANA-WOMEN2.webp', 'Side view', this)"
                 aria-label="View side image"
                 aria-pressed="false"
               >
                 <img
-                  src="../assets/Images/CABANA-WOMEN2.PNG"
+                  src="../assets/Images/CABANA-WOMEN2.webp"
                   alt="Women's set – side view"
                   class="w-full aspect-square object-cover"
-                  loading="lazy"
+                  loading="lazy" decoding="async"
                 />
               </button>
               <button
                 class="thumbnail border-2 border-gray-200 focus:outline-none focus:ring-2 focus:ring-gold"
-                onclick="changeImage('../assets/Images/CABANA-WOMEN3.PNG', 'Back view', this)"
+                onclick="changeImage('../assets/Images/CABANA-WOMEN3.webp', 'Back view', this)"
                 aria-label="View back image"
                 aria-pressed="false"
               >
                 <img
-                  src="../assets/Images/CABANA-WOMEN3.PNG"
+                  src="../assets/Images/CABANA-WOMEN3.webp"
                   alt="Women's set – back view"
                   class="w-full aspect-square object-cover"
-                  loading="lazy"
+                  loading="lazy" decoding="async"
                 />
               </button>
               <button
                 class="thumbnail border-2 border-gray-200 focus:outline-none focus:ring-2 focus:ring-gold"
-                onclick="changeImage('../assets/Images/CABANA-WOMEN4.PNG', 'Detail view', this)"
+                onclick="changeImage('../assets/Images/CABANA-WOMEN4.webp', 'Detail view', this)"
                 aria-label="View detail image"
                 aria-pressed="false"
               >
                 <img
-                  src="../assets/Images/CABANA-WOMEN4.PNG"
+                  src="../assets/Images/CABANA-WOMEN4.webp"
                   alt="Women's set – detail view"
                   class="w-full aspect-square object-cover"
-                  loading="lazy"
+                  loading="lazy" decoding="async"
                 />
               </button>
             </div>
@@ -949,11 +954,39 @@
       Swipe to view • Pinch to zoom
     </div>
 
+    <script>
+      // Gate Fabric video on mobile and only load sources when visible on desktop
+      document.addEventListener('DOMContentLoaded', function(){
+        const video = document.getElementById('fabricVideo');
+        if(!video) return;
+        const isMobile = window.matchMedia('(max-width: 767px)').matches;
+        const saveData = navigator.connection && navigator.connection.saveData;
+        const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if(isMobile || saveData || prefersReduced){
+          try { video.pause(); } catch(_){}
+          video.removeAttribute('autoplay');
+          return;
+        }
+        if('IntersectionObserver' in window){
+          const obs = new IntersectionObserver((entries)=>{
+            entries.forEach((e)=>{
+              if(e.isIntersecting){
+                const src = video.querySelector('source[data-src]');
+                if(src && !src.src){ src.src = src.getAttribute('data-src'); video.load(); }
+                video.play().catch(()=>{});
+                obs.disconnect();
+              }
+            });
+          }, { rootMargin: '200px 0px', threshold: 0.01 });
+          obs.observe(video);
+        }
+      });
+    </script>
+
     <!-- The Fabric (Video) -->
-    <section class="py-24 md:py-32 relative overflow-hidden" aria-labelledby="fabric-heading">
+    <section class="py-16 md:py-24 relative overflow-hidden" aria-labelledby="fabric-heading">
       <div class="absolute inset-0 z-0">
         <video
-          autoplay
           muted
           loop
           playsinline
@@ -961,11 +994,12 @@
           class="w-full h-full object-cover"
           poster="/assets/Images/CABANA-WOMEN.webp"
           data-offscreen-pause
-          preload="metadata"
+          preload="none"
+          id="fabricVideo"
         >
-          <source src="/assets/Images/Women.mp4" type="video/mp4" />
+          <source data-src="/assets/Images/Women.mp4" type="video/mp4" />
         </video>
-        <div class="absolute inset-0 bg-gradient-to-b from-black/30 via-black/10 to-black/40" aria-hidden="true"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-black/30 via-black/10 to-black/40 md:block hidden" aria-hidden="true"></div>
       </div>
 
       <div class="relative z-10 max-w-6xl mx-auto px-6 md:px-12">
@@ -984,6 +1018,7 @@
     <section
       class="py-20 bg-gradient-to-br from-gray-50 via-white to-gray-100 relative overflow-hidden"
       aria-labelledby="impact-heading"
+      id="womenImpact"
     >
       <!-- Luxury Background Elements -->
       <div class="absolute inset-0 opacity-5">
@@ -1462,10 +1497,10 @@
       class ProductGallery {
         constructor() {
           this.images = [
-            { src: '../assets/Images/CABANA-WOMEN.PNG', alt: 'Front view' },
-            { src: '../assets/Images/CABANA-WOMEN2.PNG', alt: 'Side view' },
-            { src: '../assets/Images/CABANA-WOMEN3.PNG', alt: 'Back view' },
-            { src: '../assets/Images/CABANA-WOMEN4.PNG', alt: 'Detail view' },
+            { src: '../assets/Images/CABANA-WOMEN.webp', alt: 'Front view' },
+            { src: '../assets/Images/CABANA-WOMEN2.webp', alt: 'Side view' },
+            { src: '../assets/Images/CABANA-WOMEN3.webp', alt: 'Back view' },
+            { src: '../assets/Images/CABANA-WOMEN4.webp', alt: 'Detail view' },
           ];
           this.currentIndex = 0;
           this.mainImage = document.getElementById('mainImage');
@@ -1691,7 +1726,7 @@
                 price: 50,
                 size: selectedSize,
                 quantity: 1,
-                image: '../assets/Images/CABANA-WOMEN.PNG',
+                image: '../assets/Images/CABANA-WOMEN.webp',
               });
             }
 
@@ -2041,8 +2076,13 @@
         if (window.innerWidth <= 768) {
           initializeMobileStickyBar();
         }
-        if (document.getElementById('currentQty')) {
-          new ResearchBasedImpactCalculator();
+        // Mount impact calculator only when visible
+        const impact = document.getElementById('womenImpact');
+        if('IntersectionObserver' in window && impact){
+          const obs = new IntersectionObserver((entries)=>{
+            entries.forEach((e)=>{ if(e.isIntersecting){ if (document.getElementById('currentQty')) { new ResearchBasedImpactCalculator(); } obs.disconnect(); } });
+          }, { rootMargin: '200px 0px', threshold: 0.01 });
+          obs.observe(impact);
         }
         updateCartCount();
 
@@ -2055,6 +2095,7 @@
             }
           });
         }
+
 
         // Mobile sticky free-shipping progress (single item basis)
         const priceElement = document.querySelector('[data-product-price]');
@@ -2079,7 +2120,10 @@
             .then(async (reg) => { try { await reg.update(); } catch (_) {} })
             .catch(() => {});
         });
-      }
-    </script>
-  </body>
-  </html>
+ 
+<script src="/assets/js/animate.js" defer></script>
+<script src="/assets/js/ga.js" defer></script>
+</body>
+</html>
+  
+

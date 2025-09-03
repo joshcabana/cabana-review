@@ -1,20 +1,157 @@
 #!/bin/bash
-# Install cwebp first: brew install webp (Mac) or apt-get install webp (Linux)
+# Requirements:
+# - WebP:   brew install webp        (macOS) or apt-get install webp (Linux)
+# - AVIF:   brew install libavif     (macOS) or apt-get install libavif-bin (Linux)
+#           Provides `avifenc`. If unavailable, ImageMagick `magick` or ffmpeg (libaom-av1) can be used.
 
-# Hero images
-cwebp -q 85 assets/Images/HERO-BANNER.png -o assets/Images/HERO-BANNER.webp
-cwebp -q 85 assets/Images/HERO-BANNER-mobile.png -o assets/Images/HERO-BANNER-mobile.webp
+avif() {
+  in="$1"; out="$2"; q="${3:-28}"
+  if command -v avifenc >/dev/null 2>&1; then
+    avifenc --min 20 --max "$q" --speed 6 "$in" "$out"
+  elif command -v magick >/dev/null 2>&1; then
+    magick "$in" -quality "$q" "$out"
+  elif command -v ffmpeg >/dev/null 2>&1; then
+    ffmpeg -y -i "$in" -pix_fmt yuv420p -c:v libaom-av1 -crf "$q" -b:v 0 "$out"
+  else
+    echo "No AVIF encoder found (avifenc/magick/ffmpeg). Skipping $out" >&2
+  fi
+}
 
-# Product images  
-cwebp -q 90 assets/Images/CABANA-BOXERS-FRONT.png -o assets/Images/CABANA-BOXERS-FRONT.webp
-cwebp -q 90 assets/Images/CABANA-BOXERS-SIDE.png -o assets/Images/CABANA-BOXERS-SIDE.webp
-cwebp -q 90 assets/Images/CABANA-BOXERS-BACK.png -o assets/Images/CABANA-BOXERS-BACK.webp
-cwebp -q 90 assets/Images/CABANA-WOMEN.PNG -o assets/Images/CABANA-WOMEN.webp
+webp() {
+  cwebp -quiet -q "${3:-85}" "$1" -o "$2"
+}
+
+# Hero images (home)
+webp assets/Images/HERO-BANNER.png assets/Images/HERO-BANNER.webp 85 || true
+# Mobile hero conversions (target ~1080px width)
+if command -v magick >/dev/null 2>&1; then
+  if [ -f assets/Images/HERO-BANNER-mobile.png ]; then
+    magick assets/Images/HERO-BANNER-mobile.png -resize 1080x -quality 75 assets/Images/HERO-BANNER-mobile.webp 2>/dev/null || true
+    magick assets/Images/HERO-BANNER-mobile.png -resize 1080x -quality 45 assets/Images/HERO-BANNER-mobile.avif 2>/dev/null || true
+  elif [ -f assets/Images/HERO-BANNER-mobile.webp ]; then
+    magick assets/Images/HERO-BANNER-mobile.webp -resize 1080x -quality 75 assets/Images/HERO-BANNER-mobile.webp 2>/dev/null || true
+    magick assets/Images/HERO-BANNER-mobile.webp -resize 1080x -quality 45 assets/Images/HERO-BANNER-mobile.avif 2>/dev/null || true
+  fi
+else
+  if [ -f assets/Images/HERO-BANNER-mobile.png ]; then
+    webp assets/Images/HERO-BANNER-mobile.png assets/Images/HERO-BANNER-mobile.webp 75 || true
+    avif assets/Images/HERO-BANNER-mobile.png assets/Images/HERO-BANNER-mobile.avif 45 || true
+  elif [ -f assets/Images/HERO-BANNER-mobile.webp ]; then
+    avif assets/Images/HERO-BANNER-mobile.webp assets/Images/HERO-BANNER-mobile.avif 45 || true
+  fi
+fi
+avif assets/Images/HERO-BANNER.png assets/Images/HERO-BANNER.avif 28 || true
+
+# Product images
+webp assets/Images/CABANA-BOXERS-FRONT.png assets/Images/CABANA-BOXERS-FRONT.webp 90 || true
+webp assets/Images/CABANA-BOXERS-SIDE.png assets/Images/CABANA-BOXERS-SIDE.webp 90 || true
+webp assets/Images/CABANA-BOXERS-BACK.png assets/Images/CABANA-BOXERS-BACK.webp 90 || true
+webp assets/Images/CABANA-WOMEN.PNG assets/Images/CABANA-WOMEN.webp 90 || true
+avif assets/Images/CABANA-BOXERS-FRONT.png assets/Images/CABANA-BOXERS-FRONT.avif 28 || true
+avif assets/Images/CABANA-BOXERS-SIDE.png assets/Images/CABANA-BOXERS-SIDE.avif 28 || true
+avif assets/Images/CABANA-BOXERS-BACK.png assets/Images/CABANA-BOXERS-BACK.avif 28 || true
+avif assets/Images/CABANA-WOMEN.PNG assets/Images/CABANA-WOMEN.avif 28 || true
+
+# Additional women's images to WebP/AVIF
+webp assets/Images/CABANA-WOMEN2.PNG assets/Images/CABANA-WOMEN2.webp 85 || true
+webp assets/Images/CABANA-WOMEN3.PNG assets/Images/CABANA-WOMEN3.webp 85 || true
+webp assets/Images/CABANA-WOMEN4.PNG assets/Images/CABANA-WOMEN4.webp 85 || true
+avif assets/Images/CABANA-WOMEN2.PNG assets/Images/CABANA-WOMEN2.avif 28 || true
+avif assets/Images/CABANA-WOMEN3.PNG assets/Images/CABANA-WOMEN3.avif 28 || true
+avif assets/Images/CABANA-WOMEN4.PNG assets/Images/CABANA-WOMEN4.avif 28 || true
+
+# Scaled 900px variants for LCP images (products)
+if command -v magick >/dev/null 2>&1; then
+  if [ -f assets/Images/CABANA-BOXERS-FRONT.png ]; then
+    magick assets/Images/CABANA-BOXERS-FRONT.png -resize 900x -quality 70 assets/Images/CABANA-BOXERS-FRONT-900.webp 2>/dev/null || true
+    magick assets/Images/CABANA-BOXERS-FRONT.png -resize 900x -quality 28 assets/Images/CABANA-BOXERS-FRONT-900.avif 2>/dev/null || true
+  fi
+  if [ -f assets/Images/CABANA-WOMEN.PNG ]; then
+    magick assets/Images/CABANA-WOMEN.PNG -resize 900x -quality 70 assets/Images/CABANA-WOMEN-900.webp 2>/dev/null || true
+    magick assets/Images/CABANA-WOMEN.PNG -resize 900x -quality 28 assets/Images/CABANA-WOMEN-900.avif 2>/dev/null || true
+  fi
+else
+  if [ -f assets/Images/CABANA-BOXERS-FRONT.png ]; then
+    webp assets/Images/CABANA-BOXERS-FRONT.png assets/Images/CABANA-BOXERS-FRONT-900.webp 70 || true
+    avif assets/Images/CABANA-BOXERS-FRONT.png assets/Images/CABANA-BOXERS-FRONT-900.avif 28 || true
+  fi
+  if [ -f assets/Images/CABANA-WOMEN.PNG ]; then
+    webp assets/Images/CABANA-WOMEN.PNG assets/Images/CABANA-WOMEN-900.webp 70 || true
+    avif assets/Images/CABANA-WOMEN.PNG assets/Images/CABANA-WOMEN-900.avif 28 || true
+  fi
+fi
 
 # Create poster frame for towel video (needs ffmpeg)
-ffmpeg -i assets/Images/TowelTease.mp4 -ss 00:00:01 -frames:v 1 assets/Images/towel-poster.jpg
-cwebp -q 85 assets/Images/towel-poster.jpg -o assets/Images/towel-poster.webp
+if command -v ffmpeg >/dev/null 2>&1; then
+  ffmpeg -y -i assets/Images/TowelTease.mp4 -ss 00:00:01 -frames:v 1 assets/Images/towel-poster.jpg
+  webp assets/Images/towel-poster.jpg assets/Images/towel-poster.webp 85
+  avif assets/Images/towel-poster.jpg assets/Images/towel-poster.avif 28
+fi
 
+# Also produce 960px variants for extra-small devices/perf
+if command -v magick >/dev/null 2>&1; then
+  if [ -f assets/Images/HERO-BANNER-mobile.png ]; then
+    magick assets/Images/HERO-BANNER-mobile.png -resize 960x540^ -gravity center -extent 960x540 -quality 70 assets/Images/HERO-BANNER-mobile-960.webp 2>/dev/null || true
+    magick assets/Images/HERO-BANNER-mobile.png -resize 960x540^ -gravity center -extent 960x540 -quality 28 assets/Images/HERO-BANNER-mobile-960.avif 2>/dev/null || true
+  elif [ -f assets/Images/HERO-BANNER-mobile.webp ]; then
+    magick assets/Images/HERO-BANNER-mobile.webp -resize 960x540^ -gravity center -extent 960x540 -quality 70 assets/Images/HERO-BANNER-mobile-960.webp 2>/dev/null || true
+    magick assets/Images/HERO-BANNER-mobile.webp -resize 960x540^ -gravity center -extent 960x540 -quality 28 assets/Images/HERO-BANNER-mobile-960.avif 2>/dev/null || true
+  fi
+else
+  if [ -f assets/Images/HERO-BANNER-mobile.png ]; then
+    webp assets/Images/HERO-BANNER-mobile.png assets/Images/HERO-BANNER-mobile-960.webp 70 || true
+    avif assets/Images/HERO-BANNER-mobile.png assets/Images/HERO-BANNER-mobile-960.avif 28 || true
+  elif [ -f assets/Images/HERO-BANNER-mobile.webp ]; then
+    avif assets/Images/HERO-BANNER-mobile.webp assets/Images/HERO-BANNER-mobile-960.avif 28 || true
+  fi
+fi
+
+# Produce 900px variants for very small devices
+if command -v magick >/dev/null 2>&1; then
+  if [ -f assets/Images/HERO-BANNER-mobile.png ]; then
+    magick assets/Images/HERO-BANNER-mobile.png -resize 900x506^ -gravity center -extent 900x506 -quality 68 assets/Images/HERO-BANNER-mobile-900.webp 2>/dev/null || true
+    magick assets/Images/HERO-BANNER-mobile.png -resize 900x506^ -gravity center -extent 900x506 -quality 28 assets/Images/HERO-BANNER-mobile-900.avif 2>/dev/null || true
+  elif [ -f assets/Images/HERO-BANNER-mobile.webp ]; then
+    magick assets/Images/HERO-BANNER-mobile.webp -resize 900x506^ -gravity center -extent 900x506 -quality 68 assets/Images/HERO-BANNER-mobile-900.webp 2>/dev/null || true
+    magick assets/Images/HERO-BANNER-mobile.webp -resize 900x506^ -gravity center -extent 900x506 -quality 28 assets/Images/HERO-BANNER-mobile-900.avif 2>/dev/null || true
+  fi
+else
+  if [ -f assets/Images/HERO-BANNER-mobile.png ]; then
+    webp assets/Images/HERO-BANNER-mobile.png assets/Images/HERO-BANNER-mobile-900.webp 68 || true
+    avif assets/Images/HERO-BANNER-mobile.png assets/Images/HERO-BANNER-mobile-900.avif 28 || true
+  elif [ -f assets/Images/HERO-BANNER-mobile.webp ]; then
+    avif assets/Images/HERO-BANNER-mobile.webp assets/Images/HERO-BANNER-mobile-900.avif 28 || true
+  fi
+fi
+
+# Produce 840px variants for even lighter mobile
+if command -v magick >/dev/null 2>&1; then
+  if [ -f assets/Images/HERO-BANNER-mobile.png ]; then
+    magick assets/Images/HERO-BANNER-mobile.png -resize 840x473^ -gravity center -extent 840x473 -quality 68 assets/Images/HERO-BANNER-mobile-840.webp 2>/dev/null || true
+    magick assets/Images/HERO-BANNER-mobile.png -resize 840x473^ -gravity center -extent 840x473 -quality 28 assets/Images/HERO-BANNER-mobile-840.avif 2>/dev/null || true
+  elif [ -f assets/Images/HERO-BANNER-mobile.webp ]; then
+    magick assets/Images/HERO-BANNER-mobile.webp -resize 840x473^ -gravity center -extent 840x473 -quality 68 assets/Images/HERO-BANNER-mobile-840.webp 2>/dev/null || true
+    magick assets/Images/HERO-BANNER-mobile.webp -resize 840x473^ -gravity center -extent 840x473 -quality 28 assets/Images/HERO-BANNER-mobile-840.avif 2>/dev/null || true
+  fi
+else
+  if [ -f assets/Images/HERO-BANNER-mobile.png ]; then
+    webp assets/Images/HERO-BANNER-mobile.png assets/Images/HERO-BANNER-mobile-840.webp 68 || true
+    avif assets/Images/HERO-BANNER-mobile.png assets/Images/HERO-BANNER-mobile-840.avif 28 || true
+  elif [ -f assets/Images/HERO-BANNER-mobile.webp ]; then
+    avif assets/Images/HERO-BANNER-mobile.webp assets/Images/HERO-BANNER-mobile-840.avif 28 || true
+  fi
+fi
 echo "Image conversion complete!"
+
+# Favicons and touch icons (if base logo exists)
+if command -v magick >/dev/null 2>&1; then
+  if [ -f assets/Images/CABANA-Logo-06.jpg ]; then
+    magick assets/Images/CABANA-Logo-06.jpg -resize 32x32 assets/Images/favicon-32x32.png 2>/dev/null || true
+    magick assets/Images/CABANA-Logo-06.jpg -resize 16x16 assets/Images/favicon-16x16.png 2>/dev/null || true
+    magick assets/Images/CABANA-Logo-06.jpg -resize 192x192 assets/Images/favicon-192x192.png 2>/dev/null || true
+    magick assets/Images/CABANA-Logo-06.jpg -resize 512x512 assets/Images/favicon-512x512.png 2>/dev/null || true
+    magick assets/Images/CABANA-Logo-06.jpg -resize 180x180 assets/Images/apple-touch-icon.png 2>/dev/null || true
+  fi
+fi
 
 

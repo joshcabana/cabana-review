@@ -30,582 +30,39 @@
     <meta name="twitter:description" content="Premium essentials. 10% of every purchase supports men's mental health and women's empowerment." />
     <meta name="twitter:image" content="https://cabanacollections.com.au/assets/Images/HERO-BANNER.png" />
 
-    <!-- Requested preloads -->
-    <link rel="preload" as="image" href="/assets/Images/HERO-BANNER.webp" fetchpriority="high" />
-    <link rel="preload" as="font" href="https://fonts.gstatic.com/s/playfairdisplay/v37/nuFvD-vYSZviVYUb_rj3ij__anPXJzDwcbmjWBN2PKdFvXDXbtM.woff2" type="font/woff2" crossorigin />
+    <!-- Requested preloads (keep minimal; do not preload mobile hero still) -->
 
     <!-- ========== ANALYTICS ========== -->
-    <!-- Google Analytics -->
-    <!-- GA4 -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3W997HDC19"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag('js', new Date());
-      // GA4 measurement ID
-      gtag('config', 'G-3W997HDC19', {
-        page_title: 'CABANA Homepage',
-        page_location: window.location.href,
-      });
-
-      // Enhanced ecommerce tracking
-      function trackPurchase(transactionId, value, items) {
-        gtag('event', 'purchase', {
-          transaction_id: transactionId,
-          value: value,
-          currency: 'AUD',
-          items: items,
-        });
-      }
-
-      function trackAddToCart(itemId, itemName, category, quantity, price) {
-        gtag('event', 'add_to_cart', {
-          currency: 'AUD',
-          value: price * quantity,
-          items: [
-            {
-              item_id: itemId,
-              item_name: itemName,
-              category: category,
-              quantity: quantity,
-              price: price,
-            },
-          ],
-        });
-      }
-
-      function trackBeginCheckout(value, items) {
-        gtag('event', 'begin_checkout', {
-          currency: 'AUD',
-          value: value,
-          items: items,
-        });
-      }
-    </script>
+    <!-- Google Analytics (guarded + deferred in /assets/js/ga.js) -->
+    <script src="/assets/js/ga.js" defer></script>
 
     <!-- ========== PERFORMANCE OPTIMISATIONS ========== -->
 
     <!-- 1. Resource Hints -->
     <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
     <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
-    <link rel="dns-prefetch" href="https://cdn.tailwindcss.com" />
     <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin />
-    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
+    
 
     <!-- 2. Preload Critical Resources -->
-    <!-- LCP image preload — HOME ONLY -->
-    <link
-      rel="preload"
-      as="image"
-      href="/assets/Images/HERO-BANNER.webp"
-      imagesrcset="/assets/Images/HERO-BANNER-mobile.webp 768w, /assets/Images/HERO-BANNER.webp 1920w"
-      imagesizes="100vw"
-    />
 
     <!-- 3. Critical Inline CSS (above-the-fold styles) -->
     <style>
-      /* Critical CSS for immediate render */
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-      body {
-        font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif;
-        background: linear-gradient(135deg, #fafaf8 0%, #f8f6f3 50%, #ffffff 100%);
-        overflow-x: hidden;
-        /* UPDATED: remove GPU transforms on body to fix fixed nav on Safari/WebKit */
-      }
-      .font-heading {
-        font-family: 'Playfair Display', serif;
-      }
-      .text-gold {
-        color: #d4af37;
-      }
-      .bg-gold {
-        background-color: #d4af37;
-      }
-      .tracking-luxury {
-        letter-spacing: 0.3em;
-      }
-
-      /* Luxury Background System */
-      .bg-luxury-cream {
-        background: linear-gradient(135deg, #fafaf8 0%, #f8f6f3 100%);
-      }
-      .bg-luxury-charcoal {
-        background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
-      }
-      .bg-luxury-white {
-        background: linear-gradient(135deg, #ffffff 0%, #fafafa 100%);
-      }
-      .section-dark {
-        background: linear-gradient(180deg, #0b0b0b 0%, #111111 60%, #1a1a1a 100%);
-        color: #fff;
-      }
-      .section-stone {
-        background: linear-gradient(180deg, #f7f7f7 0%, #efefef 100%);
-      }
-      .gold-rule {
-        height: 1px;
-        background: linear-gradient(90deg, transparent, #d4af37, transparent);
-        opacity: 0.5;
-      }
-      .section-dark.bg-noise {
-        position: relative;
-      }
-      .section-dark.bg-noise::before {
-        content: '';
-        position: absolute;
-        inset: 0;
-        pointer-events: none;
-        background-image: radial-gradient(#ffffff11 1px, transparent 1px);
-        background-size: 3px 3px;
-        opacity: 0.05;
-        mix-blend-mode: overlay;
-      }
-      .bg-luxury-gradient {
-        background: linear-gradient(135deg, #fafaf8 0%, #ffffff 50%, #f8f6f3 100%);
-        position: relative;
-      }
-      .bg-luxury-gradient::before {
-        content: '';
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(
-          45deg,
-          rgba(212, 175, 55, 0.02) 0%,
-          transparent 50%,
-          rgba(212, 175, 55, 0.01) 100%
-        );
-        pointer-events: none;
-      }
-
-      /* Subtle Texture Overlay */
-      .texture-overlay::before {
-        content: '';
-        position: absolute;
-        inset: 0;
-        background-image: radial-gradient(
-          circle at 1px 1px,
-          rgba(0, 0, 0, 0.02) 1px,
-          transparent 0
-        );
-        background-size: 20px 20px;
-        pointer-events: none;
-        opacity: 0.3;
-      }
-
-      /* Hero section critical styles */
+      /* Critical inline: hero container only */
       .cabana-hero {
-        /* Fallback then modern viewport height to avoid iOS 100vh bug */
         min-height: 100vh;
         min-height: 100svh;
         display: flex;
         align-items: center;
         justify-content: center;
         position: relative;
+        background-color: #0a0a0a;
       }
-
-      /* REMOVED: Breathing animation for better performance */
-      .hero-breathe {
-        /* Animation removed to eliminate constant GPU usage */
-        transform: translateZ(0);
-        backface-visibility: hidden;
-      }
-
-      /* Elegant fade animations */
-      @keyframes fadeInUp {
-        from {
-          opacity: 0;
-          transform: translateY(30px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
-      @keyframes fadeInDown {
-        from {
-          opacity: 0;
-          transform: translateY(-30px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
-      .fade-in-up {
-        animation: fadeInUp 1.2s ease-out forwards;
-      }
-      .fade-in-down {
-        animation: fadeInDown 1.2s ease-out forwards;
-      }
-
-      @keyframes fadeIn {
-        to {
-          opacity: 1;
-        }
-      }
-
-      /* Luxury hover effects */
-      .luxury-hover {
-        transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        position: relative;
-        overflow: hidden;
-      }
-
-      .luxury-hover::before {
-        content: '';
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(
-          45deg,
-          transparent 0%,
-          rgba(212, 175, 55, 0.05) 50%,
-          transparent 100%
-        );
-        transform: translateX(-200%);
-        transition: transform 0.8s ease;
-      }
-
-      .luxury-hover:hover::before {
-        transform: translateX(200%);
-      }
-
-      .luxury-hover:hover {
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
-        transform: translateY(-2px);
-      }
-
-      /* Enhanced Navigation Styles */
-      .nav-wrapper {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        background: rgba(0, 0, 0, 0.95);
-        -webkit-backdrop-filter: blur(10px);
-        backdrop-filter: blur(10px);
-        z-index: 1000;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        transition: all 0.2s ease-out;
-        transform: translateY(-100%);
-        opacity: 0;
-      }
-
-      .nav-wrapper.visible {
-        transform: translateY(0);
-        opacity: 1;
-      }
-
-      .nav-wrapper.nav-scrolled {
-        background: rgba(0, 0, 0, 0.98);
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-        -webkit-backdrop-filter: blur(15px);
-        backdrop-filter: blur(15px);
-      }
-
-      /* Enhanced hero animations */
-      .hero-content {
-        animation: heroFadeUp 1.2s ease-out forwards;
-      }
-
-      @keyframes heroFadeUp {
-        from {
-          opacity: 0;
-          transform: translateY(30px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
-      /* Luxury hover effects */
-      .luxury-hover {
-        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      }
-
-      .luxury-hover:hover {
-        transform: translateY(-2px);
-        color: #d4af37;
-      }
-
-      /* UPDATED: reduce motion for users who prefer less */
-      @media (prefers-reduced-motion: reduce) {
-        .fade-in-up,
-        .fade-in-down,
-        .hero-content,
-        .luxury-hover::before,
-        .luxury-button::before {
-          animation: none !important;
-          transition: none !important;
-        }
-      }
-
-      /* Luxury Button Animations */
-      .luxury-button {
-        position: relative;
-        overflow: hidden;
-        transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      }
-
-      .luxury-button::before {
-        content: '';
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(
-          45deg,
-          transparent 0%,
-          rgba(255, 255, 255, 0.1) 50%,
-          transparent 100%
-        );
-        transform: translateX(-200%);
-        transition: transform 0.6s ease;
-      }
-
-      .luxury-button:hover::before {
-        transform: translateX(200%);
-      }
-
-      .luxury-button:active {
-        transform: translateY(1px);
-      }
-
-      /* REMOVED: Float animation for better performance */
-      .float-gentle {
-        /* Animation removed to reduce continuous GPU load */
-        transform: translateZ(0);
-        backface-visibility: hidden;
-      }
-
-      /* SIMPLIFIED: Parallax effect */
-      .parallax-slow {
-        transform: translateZ(0);
-        backface-visibility: hidden;
-      }
-
-      /* Smooth page transitions */
-      .page-transition {
-        opacity: 0;
-        animation: pageEnter 1s ease-out forwards;
-      }
-
-      @keyframes pageEnter {
-        from {
-          opacity: 0;
-          transform: translateY(20px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
-      /* Prevent layout shift */
-      img {
-        max-width: 100%;
-        height: auto;
-      }
-      .lazy-img {
-        background: linear-gradient(135deg, #f5f5f5 0%, #f0f0f0 100%);
-        transition: all 0.3s ease;
-      }
-
-      /* CABANA Logo Smooth Transition Effect - GUCCI Style */
-      .cabana-logo-nav {
-        display: inline-block;
-        transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        position: relative;
-        transform: translateY(0);
-      }
-
-      .cabana-logo-nav:hover {
-        transform: translateY(-3px);
-        color: #d4af37;
-      }
-
-      /* Add subtle shadow on hover */
-      .cabana-logo-nav::after {
-        content: '';
-        position: absolute;
-        bottom: -8px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 0;
-        height: 2px;
-        background: linear-gradient(90deg, transparent, #d4af37, transparent);
-        transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        opacity: 0;
-      }
-
-      .cabana-logo-nav:hover::after {
-        width: 100%;
-        opacity: 0.8;
-      }
-
-      /* Reusable gold underline + color for links */
-      .link-hover {
-        position: relative;
-        transition: color 0.3s ease;
-      }
-      .link-hover::after {
-        content: '';
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
-        bottom: -6px;
-        height: 2px;
-        width: 0;
-        background: linear-gradient(90deg, transparent, #d4af37, transparent);
-        opacity: 0;
-        transition:
-          width 0.3s ease,
-          opacity 0.3s ease;
-      }
-      .link-hover:hover,
-      .link-hover:focus-visible {
-        color: #d4af37;
-      }
-      .link-hover:hover::after,
-      .link-hover:focus-visible::after {
-        width: 100%;
-        opacity: 0.8;
-      }
-      @media (prefers-reduced-motion: reduce) {
-        .link-hover,
-        .link-hover::after {
-          transition: none;
-        }
-      }
-
-      /* Impact Banner Styles */
-      .impact-banner {
-        background: linear-gradient(90deg, #d4af37, #f5d061);
-        transform: translateY(-100%);
-        opacity: 0;
-        transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        border-bottom: 1px solid rgba(212, 175, 55, 0.2);
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        z-index: 60;
-      }
-
-      .impact-banner.show {
-        transform: translateY(0);
-        opacity: 1;
-      }
-
-      .impact-banner.hidden {
-        transform: translateY(-100%);
-        opacity: 0;
-      }
-
-      .impact-banner-text {
-        font-size: 0.875rem;
-        font-weight: 500;
-        letter-spacing: 0.05em;
-        color: #000;
-        text-transform: none;
-      }
-
-      .impact-banner-close {
-        opacity: 0.6;
-        transition: opacity 0.2s ease;
-        color: #000;
-      }
-
-      .impact-banner-close:hover {
-        opacity: 1;
-      }
-
-      /* Adjust navigation for banner */
-      .nav-with-banner {
-        top: 40px;
-      }
-
-      .nav-with-banner.nav-scrolled {
-        top: 0;
-        transition: top 0.3s ease-out;
-      }
-      /* UPDATED: Performance – lazy-render below-the-fold sections */
-      section[aria-labelledby='mid-newsletter-heading'],
-      section[aria-labelledby='collection-heading'],
-      section[aria-labelledby='impact-heading'],
-      section[aria-labelledby='newsletter-heading'] {
-        content-visibility: auto;
-        contain-intrinsic-size: 800px 1000px;
-      }
-
-      /* Louis Vuitton-inspired editorial theme (scoped) */
-      .lv-page {
-        --lv-ink: #111111;
-        --lv-ebony: #1d1a16;
-        --lv-cognac: #6e4c1e;
-        --lv-gold: #b98d38;
-        --lv-ivory: #f6f1e7;
-      }
-
-      .lv-page .font-heading {
-        font-family: 'Cinzel', serif !important;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-      }
-      .lv-page .text-gold {
-        color: var(--lv-gold);
-      }
-
-      /* LV pill CTA */
-      .lv-page .lv-cta {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        padding: 0.9rem 2.5rem;
-        border-radius: 9999px;
-        border: 1px solid var(--lv-ink);
-        background: #ffffff;
-        color: var(--lv-ink);
-        font-family: 'Cinzel', serif;
-        letter-spacing: 0.22em;
-        text-transform: uppercase;
-        font-weight: 500;
-        transition:
-          background 0.25s ease,
-          color 0.25s ease,
-          border-color 0.25s ease,
-          transform 0.2s ease;
-        box-shadow: none;
-      }
-      .lv-page .lv-cta:hover {
-        background: var(--lv-ink);
-        color: #ffffff;
-        border-color: var(--lv-ink);
-        transform: translateY(-1px);
-      }
-
-      /* Section hairline rules (subtle) */
-      .lv-page .lv-hairline {
-        height: 1px;
-        background: #e5e0d7;
-        opacity: 0.9;
-      }
-      .lv-page .lv-underline {
-        display: block;
-        height: 3px;
-        width: 120px;
-        margin: 0.75rem auto 0;
-        background: linear-gradient(90deg, transparent, var(--lv-gold), transparent);
+      /* Micro mobile paint reduction: disable luxe texture overlay before deferred CSS */
+      @media (max-width: 767px){
+        .luxe-texture::before{ display: none !important; }
       }
     </style>
 
@@ -621,33 +78,16 @@
     <meta name="msapplication-TileColor" content="#000000" />
 
     <!-- 5. Async Font Loading with display=swap -->
-    <link
-      rel="preload"
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@100;200;300;400;500&display=swap"
-      as="style"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@100;200;300;400;500&display=swap"
-      rel="stylesheet"
-      media="print"
-      onload="this.media='all'"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:wght@300;400;500&display=swap"
-      rel="stylesheet"
-      media="print"
-      onload="this.media='all'"
-    />
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400&family=Inter:wght@400&display=optional" as="style" />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400&family=Inter:wght@400&display=optional" rel="stylesheet" media="print" onload="this.media='all'" />
 
-    <!-- 6. Tailwind CSS (built) -->
+    <!-- 6. Tailwind CSS (render-blocking for stability) -->
     <link rel="stylesheet" href="/css/tw.out.css" />
-    <!-- UPDATED: global stylesheet -->
-    <link rel="stylesheet" href="/css/styles.css" />
-    <link rel="stylesheet" href="/css/optimized/lazy-loading.css" />
-    <link rel="stylesheet" href="/css/optimized/performance.css" />
-    <link rel="stylesheet" href="/public/css/mobile-fixes.css" />
-    <!-- Mobile/perf hardening: additive utilities; import last to avoid overrides -->
-    <link rel="stylesheet" href="/assets/css/mobile.css" />
+    <!-- Defer custom stylesheet to avoid render-blocking -->
+    <link rel="preload" href="/css/styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/css/styles.css"></noscript>
+
+    
 
     <!-- REMOVED: duplicate OG/Twitter block to keep one clean OG set only -->
 
@@ -682,7 +122,7 @@
           onclick="dismissImpactBanner()"
           aria-label="Close impact banner"
         >
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
             <path
               stroke-linecap="round"
               stroke-linejoin="round"
@@ -702,13 +142,13 @@
     >
 
     <!-- New Sticky Header + Mobile Drawer -->
-    <header class="sticky-header" role="banner" id="mainNav">
-      <div class="max-w-7xl mx-auto px-6 md:px-12 py-4 flex items-center justify-between">
+    <header class="sticky-header site-header" role="banner" id="mainNav">
+      <div class="max-w-7xl mx-auto px-6 md:px-12 py-4 flex items-center justify-between nav-row">
         <a href="/" class="font-heading tracking-luxury font-light leading-tight">
           <span class="block text-2xl">CABANA</span>
           <span class="block text-xs tracking-wider -mt-0.5">Collections</span>
         </a>
-        <nav class="hidden md:flex items-center gap-10" aria-label="Primary">
+        <nav class="hidden md:flex items-center gap-10 nav-links" aria-label="Primary">
           <a href="/" class="link-hover text-xs tracking-widest" aria-current="page">HOME</a>
           <a href="/products/mens-boxer-brief-black.html" class="link-hover text-xs tracking-widest"
             >MEN</a
@@ -722,7 +162,7 @@
           <a href="/cart.html" aria-label="Cart" class="hidden md:inline">🛒</a>
           <a href="#" data-login-open class="hidden md:inline text-xs tracking-widest">Login</a>
           <button class="md:hidden p-2" aria-label="Open menu" data-mobile-open>
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path
                 stroke-linecap="round"
                 stroke-linejoin="round"
@@ -757,56 +197,19 @@
     <!-- Hero Section -->
     <!-- Hero Section (Updated Gucci-Style) -->
     <section
-      class="cabana-hero min-h-screen flex items-center justify-center relative pt-32 overflow-hidden"
+      class="cabana-hero min-h-screen flex items-center justify-center relative pt-16 overflow-hidden"
       id="heroSection"
     >
       <!-- Background: switch to static image for best LCP -->
       <div class="absolute inset-0 z-0">
-        <!-- Image-first for fast LCP; video is revealed later when allowed -->
-        <picture id="heroImageWrap" class="absolute inset-0 block z-0">
-          <source
-            srcset="
-              /assets/Images/HERO-BANNER.webp        1920w,
-              /assets/Images/HERO-BANNER-mobile.webp  768w
-            "
-            type="image/webp"
-            sizes="100vw"
-          />
-          <img
-            id="heroImageFallback"
-            src="/assets/Images/HERO-BANNER.png"
-            sizes="100vw"
-            alt="CABANA hero background"
-            class="w-full h-full object-cover"
-            width="1920"
-            height="1080"
-            fetchpriority="high"
-            decoding="async"
-          />
+        <!-- Mobile: static picture (LCP). Desktop: attach video after idle via JS. -->
+        <picture class="absolute inset-0 block z-0 cabana-hero-media" data-video-src="/assets/Images/HERO-BANNER-opt.mp4">
+          <!-- Mobile still (LCP) only -->
+          <source type="image/avif" srcset="/assets/Images/HERO-BANNER-mobile-900.avif" media="(max-width: 767px)" />
+          <source type="image/webp" srcset="/assets/Images/HERO-BANNER-mobile-900.webp" media="(max-width: 767px)" />
+          <img src="/assets/Images/HERO-BANNER-mobile-900.webp" width="1200" height="675" sizes="100vw" fetchpriority="high" alt="" class="w-full h-full object-cover" />
         </picture>
-
-        <video
-          id="heroBgVideo"
-          autoplay
-          muted
-          loop
-          playsinline
-          webkit-playsinline
-          onloadedmetadata="this.muted = true; this.playsInline = true;"
-          onplay="this.playsInline = true;"
-          class="w-full h-full object-cover"
-          poster="/assets/Images/HERO-BANNER.webp"
-          data-offscreen-pause
-          preload="metadata"
-          style="display: none"
-          aria-hidden="true"
-        >
-          <source src="/assets/Images/HERO-BANNER.mp4" type="video/mp4" />
-          <!-- Fallback for browsers that don't support video -->
-          <div class="w-full h-full bg-gradient-to-br from-slate-900 via-black to-slate-800"></div>
-        </video>
-        <!-- Dark overlay for text readability -->
-        <div class="absolute inset-0 bg-black/35" aria-hidden="true"></div>
+        
       </div>
 
       <!-- Hero Content -->
@@ -815,7 +218,7 @@
       >
         <!-- Headline -->
         <h1
-          class="font-heading tracking-tight text-white leading-[1.08] text-[clamp(2rem,5.5vw,4.5rem)] soft-fade-up"
+          class="font-heading tracking-tight text-white leading-[1.08] text-[clamp(2rem,5.5vw,4.5rem)] soft-fade-up hero-title"
         >
           <span class="block">Timeless Design, Born From Nature</span>
           <span class="block mt-4 text-[clamp(1rem,2.1vw,1.35rem)] text-white/90">
@@ -847,11 +250,10 @@
         </div>
       </div>
 
-      <!-- Tailwind build check -->
-      <div class="p-6 bg-black text-white rounded-lg absolute left-6 bottom-6 z-30">
-        Tailwind v4 is working
-      </div>
+      
     </section>
+
+    <div class="mt-6 md:mt-0" aria-hidden="true"></div>
 
     <!-- Main Content -->
     <main id="main-content">
@@ -870,7 +272,7 @@
         <a href="https://www.beyondblue.org.au/" target="_blank" rel="noopener" class="mt-3 inline-block underline underline-offset-4">Learn more</a>
       </section>
       <!-- Mid-Page Newsletter (after Philosophy, before Collection) -->
-      <section class="py-16 md:py-20 bg-white" aria-labelledby="mid-newsletter-heading">
+      <section class="py-16 md:py-24 bg-white" aria-labelledby="mid-newsletter-heading">
         <div class="max-w-4xl mx-auto px-6 md:px-12 text-center">
           <h2
             id="mid-newsletter-heading"
@@ -896,9 +298,9 @@
         </div>
       </section>
       <!-- Philosophy Section -->
-      <section class="py-32 md:py-48 relative overflow-hidden" aria-labelledby="philosophy-heading">
+      <section class="py-16 md:py-24 relative overflow-hidden philosophy" aria-labelledby="philosophy-heading">
         <!-- Video Background -->
-        <div class="absolute inset-0 z-0">
+        <div class="absolute inset-0 z-0 philosophy-bg" style="background:#0a0a0a;">
           <video
             autoplay
             muted
@@ -907,34 +309,16 @@
             onloadedmetadata="this.muted = true; this.playsInline = true;"
             onplay="this.playsInline = true;"
             class="w-full h-full object-cover"
-            poster="/assets/Images/CABANA-WOMEN.webp"
             data-offscreen-pause
+            preload="none"
+            id="philosophyVideo"
           >
-            <source src="/assets/Images/Women.mp4" type="video/mp4" />
-            <!-- Fallback for browsers that don't support video -->
-            <div
-              class="w-full h-full bg-gradient-to-br from-slate-900 via-black to-slate-800"
-            ></div>
+            <source data-src="/assets/Images/Women.mp4" type="video/mp4" media="(min-width: 768px)" />
           </video>
-          <!-- Dark overlay for text readability -->
-          <div
-            class="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/50"
-          ></div>
+          
         </div>
 
-        <!-- Luxury texture overlay -->
-        <div class="absolute inset-0 opacity-5 z-10 gold-dots-overlay" aria-hidden="true"></div>
-
-        <!-- Floating decorative elements -->
-        <div
-          class="absolute top-20 left-10 w-20 h-20 bg-gradient-to-br from-gold/20 to-yellow-400/20 rounded-full opacity-20 z-10 animate-float"
-        ></div>
-        <div
-          class="absolute top-40 right-20 w-16 h-16 bg-gradient-to-br from-white/10 to-gray-300/10 rounded-full opacity-15 z-10 animate-float-slow"
-        ></div>
-        <div
-          class="absolute bottom-20 left-1/4 w-12 h-12 bg-gradient-to-br from-gold/15 to-amber-400/15 rounded-full opacity-25 z-10 animate-float-slower"
-        ></div>
+        
 
         <div class="max-w-6xl mx-auto px-8 md:px-16 relative z-10">
           <div class="grid lg:grid-cols-2 gap-16 md:gap-24 items-center">
@@ -971,7 +355,7 @@
                 <div
                   class="flex items-center gap-2 bg-green-600/20 text-green-400 px-4 py-2 rounded-full border border-green-500/30"
                 >
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <path
                       stroke-linecap="round"
                       stroke-linejoin="round"
@@ -984,7 +368,7 @@
                 <div
                   class="flex items-center gap-2 bg-blue-600/20 text-blue-400 px-4 py-2 rounded-full border border-blue-500/30"
                 >
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <path
                       stroke-linecap="round"
                       stroke-linejoin="round"
@@ -997,7 +381,7 @@
                 <div
                   class="flex items-center gap-2 bg-pink-600/20 text-pink-400 px-4 py-2 rounded-full border border-pink-500/30"
                 >
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <path
                       stroke-linecap="round"
                       stroke-linejoin="round"
@@ -1010,7 +394,7 @@
                 <div
                   class="flex items-center gap-2 bg-amber-600/20 text-amber-400 px-4 py-2 rounded-full border border-amber-500/30"
                 >
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <path
                       stroke-linecap="round"
                       stroke-linejoin="round"
@@ -1042,7 +426,7 @@
       </section>
 
       <!-- Collection Section -->
-       <section class="py-32 md:py-48 relative overflow-hidden" aria-labelledby="collection-heading" style="background-image:url('/assets/Images/MobileHome.png');background-size:cover;background-position:center;">
+       <section class="py-16 md:py-24 relative overflow-hidden" aria-labelledby="collection-heading" style="background-image:url('/assets/Images/MobileHome.png');background-size:cover;background-position:center;">
         <!-- Background: Clean, minimal design with MobileHome.png applied -->
         <div class="absolute inset-0 z-0 bg-white/30" aria-hidden="true"></div>
 
@@ -1187,7 +571,7 @@
 
       <!-- Impact Section -->
       <section
-        class="py-32 md:py-48 bg-luxury-charcoal text-white relative overflow-hidden"
+        class="py-16 md:py-24 bg-luxury-charcoal text-white relative overflow-hidden"
         aria-labelledby="impact-heading"
       >
         <div class="max-w-6xl mx-auto px-6 md:px-12">
@@ -1242,7 +626,7 @@
 
     <!-- Newsletter Signup Section -->
     <section
-      class="py-32 md:py-48 gradient-champagne-sage luxe-texture relative overflow-hidden"
+      class="py-16 md:py-24 gradient-champagne-sage luxe-texture relative overflow-hidden"
       aria-labelledby="newsletter-heading"
     >
       <!-- Background texture -->
@@ -1346,6 +730,7 @@
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
+              aria-hidden="true"
             >
               <path
                 stroke-linecap="round"
@@ -1787,7 +1172,7 @@
       }
 
       // Initialise performance optimisations
-      setTimeout(optimisePerformance, 100);
+      if ('requestIdleCallback' in window) { requestIdleCallback(optimisePerformance); } else { setTimeout(optimisePerformance, 100); }
 
       // Newsletter Subscription
       function subscribeNewsletter(event) {
@@ -1887,27 +1272,34 @@
       // Make newsletter function globally available
       window.subscribeNewsletter = subscribeNewsletter;
 
-      // Hero: Text carousel and video optimisation
+      // Hero: Text carousel (idle) and video optimisation
       document.addEventListener('DOMContentLoaded', function () {
-        // Text carousel phrases (avoid the word often overused by premium brands)
-        const phrases = [
-          'Quiet refinement, worn every day',
-          'Sustainably crafted. Designed to last',
-          'Considered materials, considered impact',
-          'Comfort that contributes',
-        ];
-        const el = document.getElementById('heroTextCarousel');
-        if (el) {
-          let idx = 0;
-          el.textContent = phrases[idx];
-          setInterval(() => {
-            idx = (idx + 1) % phrases.length;
-            el.style.opacity = '0';
-            setTimeout(() => {
-              el.textContent = phrases[idx];
-              el.style.opacity = '1';
-            }, 250);
-          }, 3500);
+        // Defer carousel to idle to avoid impacting first paint
+        const startCarousel = () => {
+          const phrases = [
+            'Quiet refinement, worn every day',
+            'Sustainably crafted. Designed to last',
+            'Considered materials, considered impact',
+            'Comfort that contributes',
+          ];
+          const el = document.getElementById('heroTextCarousel');
+          if (el) {
+            let idx = 0;
+            el.textContent = phrases[idx];
+            setInterval(() => {
+              idx = (idx + 1) % phrases.length;
+              el.style.opacity = '0';
+              setTimeout(() => {
+                el.textContent = phrases[idx];
+                el.style.opacity = '1';
+              }, 250);
+            }, 3500);
+          }
+        };
+        // Disable carousel on mobile to reduce first-paint script cost
+        const isMobileCarousel = window.matchMedia('(max-width: 767px)').matches;
+        if (!isMobileCarousel) {
+          if ('requestIdleCallback' in window) { requestIdleCallback(startCarousel); } else { setTimeout(startCarousel, 1); }
         }
 
         // Video optimisation: image-first LCP; reveal/play video only when appropriate
@@ -1915,9 +1307,10 @@
         const heroImage = document.getElementById('heroImageFallback');
         const saveData = navigator.connection && navigator.connection.saveData;
         const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const isMobile = window.matchMedia('(max-width: 767px)').matches;
 
         if (heroVideo) {
-          const allowMotion = !saveData && !prefersReduced; // play on both desktop and mobile
+          const allowMotion = !saveData && !prefersReduced && !isMobile;
 
           if (!allowMotion) {
             try { heroVideo.pause(); } catch (_) {}
@@ -1967,6 +1360,8 @@
 
     <!-- Performance Optimiser Script -->
     <script src="/js/performance-optimizer.js" defer></script>
+    <script src="/assets/js/lazy-philosophy.js" defer></script>
+    <script src="/assets/js/attach-hero-video.js" defer></script>
     <!-- Shared UI Enhancements (nav shadow, etc.) -->
     <script src="/js/ui.js" defer></script>
     <!-- Mobile Nav Drawer -->
@@ -1977,7 +1372,7 @@
 
     <!-- Error Handling and Debugging -->
     <script>
-      // Global error handler
+      // Global error handler (always keep errors)
       window.addEventListener('error', function (e) {
         console.error('Page Error:', e.error);
         console.error('Line:', e.lineno, 'Column:', e.colno);
@@ -1986,6 +1381,16 @@
 
       // Check if all sections are properly loaded
       document.addEventListener('DOMContentLoaded', function () {
+        // Gate non-essential console logs to development only
+        (function(){
+          var isDev = /^(localhost|127\.0\.0\.1)$/i.test(location.hostname);
+          if (!isDev) {
+            var noop = function(){};
+            console.log = noop;
+            console.info = noop;
+            // keep warn/error
+          }
+        })();
         const sections = {
           hero: document.getElementById('heroSection'),
           philosophy: document.querySelector('[aria-labelledby="philosophy-heading"]'),
